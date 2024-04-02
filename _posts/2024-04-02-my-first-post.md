@@ -1,15 +1,20 @@
 ---
-title: 포스팅 제목
-date: YYYY-MM-DD HH:MM:SS +09:00
-categories: [메인 카테고리, 서브 카테고리]
+title:  "[Jekyll] 블로그 포스팅하는 방법"
+
+excerpt: "md 파일에 마크다운 문법으로 작성하여 Github 원격 저장소에 업로드 해보자."
+
+categories:
+- Blog
+
 tags:
-  [
-  태그1,
-  태그2,
-  태그3,
-  .
-  .
-  .
-  ]
+- [Blog, jekyll, Github, Git]
+
+toc: true
+
+toc_sticky: true
+
+date: 2024-04-02
+
+last_modified_at: 2024-04-03
 
 ---
