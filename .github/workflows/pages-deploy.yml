@@ -52,14 +52,13 @@ jobs:
 
       - name: Test site
         run: |
-          bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
+          bundle exec htmlproofer _javascript \
             \-\-disable-external=true \
             \-\-ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
-
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "_javascript${{ steps.pages.outputs.base_path }}"
+          path: "_site${{ steps.pages.outputs.base_path }}"
 
   deploy:
     environment:
