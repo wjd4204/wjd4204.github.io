@@ -24,7 +24,7 @@ last_modified_at: 2024-04-03
 - 기존 Section1~3까지의 문제들은 간단한 문법을 이용하기에 이하생략하도록 하겠다.
   <br>
 
-## :white_check_mark: 문제
+## :round_pushpin: 문제
 
 -----
 >설명
@@ -41,13 +41,13 @@ last_modified_at: 2024-04-03
 > >학급 회장으로 선택된 기호를 출력합니다.
 >
 > 예시 입력
->         예시 출력
-> >15                  c
-> <br>BACBACCACCBDEDE
+> >15<br>BACBACCACCBDEDE
 >
+> 예시 출력
+> >c
 <br>
 
-## :white_check_mark: 해결방안
+## :round_pushpin: 해결방안
 
 -------
 ### :pencil2: 방안 모색
