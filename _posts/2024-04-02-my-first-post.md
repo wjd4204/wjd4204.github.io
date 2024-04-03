@@ -1,5 +1,5 @@
 ---
-title:  "[Java] 4-1. 학급 회장(해쉬)"
+title: "[Java] 4-1. 학급 회장(해쉬)"
 
 excerpt: 
 > Section4. HashMap, TreeSet (해쉬, 정렬지원 Set)
