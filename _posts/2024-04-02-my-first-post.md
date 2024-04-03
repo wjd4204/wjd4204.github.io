@@ -5,7 +5,7 @@ categories:
 - 코딩 테스트
 
 tags:
-- [codingTest, HashMap, Algorithm]
+- [codingTest, HashMap, DataStructure]
 
 toc: true
 
@@ -104,3 +104,6 @@ public class P01_학급회장 {
 }
 
 ```
+---
+- 이번 포스트를 포함하여 앞으로 사용하게 될 문제들은 인프런의 "자바(Java) 알고리즘 문제풀이 입문: 코딩테스트 대비"
+를 기반으로 진행할 예정이다. :smile:
