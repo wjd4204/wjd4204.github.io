@@ -1,83 +1,70 @@
-<!-- markdownlint-disable-next-line -->
-<div align="center">
+# Backend Developer Portfolio
 
-  <!-- markdownlint-disable-next-line -->
-  # Chirpy Jekyll Theme
+Astro 기반의 백엔드 개발자 포트폴리오 사이트입니다. 미니멀한 기술 문서형 스타일을 사용하고, 프로젝트 상세 페이지는 PPT 슬라이드처럼 읽히는 큰 카드 섹션으로 구성했습니다.
 
-  A minimal, responsive, and feature-rich Jekyll theme for technical writing.
+## Pages
 
-  [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy?color=brightgreen)][gem]&nbsp;
-  [![CI](https://github.com/cotes2020/jekyll-theme-chirpy/actions/workflows/ci.yml/badge.svg?branch=master&event=push)][ci]&nbsp;
-  [![Codacy Badge](https://app.codacy.com/project/badge/Grade/4e556876a3c54d5e8f2d2857c4f43894)][codacy]&nbsp;
-  [![GitHub license](https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy.svg)][license]&nbsp;
-  [![996.icu](https://img.shields.io/badge/link-996.icu-%23FF4D5B.svg)](https://996.icu)
+- `/`: 자기소개, 기술 스택, 대표 프로젝트 3개
+- `/projects/`: 프로젝트 목록
+- `/projects/{id}/`: 프로젝트 상세 페이지
 
-  [**Live Demo** →][demo]
+## Stack
 
-  [![Devices Mockup](https://chirpy-img.netlify.app/commons/devices-mockup.png)][demo]
+- Astro
+- Markdown Content Collections
+- GitHub Pages
 
-</div>
+## Local Development
 
-## Features
+```bash
+npm install
+npm run dev
+```
 
-- Dark / Light Theme Mode
-- Localized UI language
-- Pinned Posts on Home Page
-- Hierarchical Categories
-- Trending Tags
-- Table of Contents
-- Last Modified Date
-- Syntax Highlighting
-- Mathematical Expressions
-- Mermaid Diagrams & Flowcharts
-- Dark / Light Mode Images
-- Embed Videos
-- Disqus / Giscus / Utterances Comments
-- Built-in Search
-- Atom Feeds
-- PWA
-- Google Analytics / GoatCounter
-- SEO & Performance Optimization
+로컬 서버가 실행되면 터미널에 표시되는 주소로 접속합니다. 일반적으로 `http://localhost:4321`입니다.
 
-## Documentation
+## Build
 
-To learn how to use, develop, and upgrade the project, please refer to the [Wiki][wiki].
+```bash
+npm run build
+```
 
-## Contributing
+빌드 결과물은 `dist/`에 생성됩니다.
 
-Contributions (_pull requests_, _issues_, and _discussions_) are what make the open-source community such an amazing place
-to learn, inspire, and create. Any contributions you make are greatly appreciated.
-For details, see the "[Contributing Guidelines][contribute-guide]".
+## Project Content
 
-## Credits
+프로젝트 데이터는 `src/content/projects/*.md`에서 관리합니다. 각 프로젝트는 frontmatter에 상세 페이지 렌더링에 필요한 데이터를 포함합니다.
 
-### Contributors
+주요 필드:
 
-Thanks to [all the contributors][contributors] involved in the development of the project!
+- `title`, `description`, `summary`
+- `period`, `team`, `role`, `stack`
+- `image`, `imageAlt`
+- `slides`
+- `featured`
 
-[![all-contributors](https://contrib.rocks/image?repo=cotes2020/jekyll-theme-chirpy&columns=16)][contributors]
-<sub> —— Made with [contrib.rocks](https://contrib.rocks)</sub>
+상세 페이지의 `slides`는 다음 5개 섹션을 기준으로 작성합니다.
 
-### Third-Party Assets
+- `Overview`
+- `Problem`
+- `Tech Choice`
+- `Solution`
+- `Result`
 
-This project is built on the [Jekyll][jekyllrb] ecosystem and some [great libraries][lib], and is developed using [VS Code][vscode] as well as tools provided by [JetBrains][jetbrains] under a non-commercial open-source software license.
+## Components
 
-The avatar and favicon for the project's website are from [ClipartMAX][clipartmax].
+- `src/layouts/BaseLayout.astro`: 공통 HTML, 메타 태그, 헤더, 푸터
+- `src/components/ProjectCard.astro`: 프로젝트 카드
+- `src/components/ProjectSlide.astro`: 프로젝트 상세 슬라이드 섹션
 
-## License
+## Deploy To GitHub Pages
 
-This project is published under [MIT License][license].
+`main` 또는 `master` 브랜치에 push하면 `.github/workflows/pages-deploy.yml`이 실행됩니다.
 
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[ci]: https://github.com/cotes2020/jekyll-theme-chirpy/actions/workflows/ci.yml?query=event%3Apush+branch%3Amaster
-[codacy]: https://app.codacy.com/gh/cotes2020/jekyll-theme-chirpy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade
-[license]: https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE
-[jekyllrb]: https://jekyllrb.com/
-[clipartmax]: https://www.clipartmax.com/middle/m2i8b1m2K9Z5m2K9_ant-clipart-childrens-ant-cute/
-[demo]: https://cotes2020.github.io/chirpy-demo/
-[wiki]: https://github.com/cotes2020/jekyll-theme-chirpy/wiki
-[contribute-guide]: https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/docs/CONTRIBUTING.md
-[contributors]: https://github.com/cotes2020/jekyll-theme-chirpy/graphs/contributors
-[lib]: https://github.com/cotes2020/chirpy-static-assets
-[vscode]: https://code.visualstudio.com/
-[jetbrains]: https://www.jetbrains.com/?from=jekyll-theme-chirpy
+배포 흐름:
+
+1. GitHub Actions에서 Node.js 22를 설정합니다.
+2. `npm install`로 의존성을 설치합니다.
+3. `npm run build`로 Astro 사이트를 빌드합니다.
+4. `dist/`를 GitHub Pages artifact로 업로드합니다.
+5. GitHub Pages에 배포합니다.
