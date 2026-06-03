@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460">
+  <rect width="720" height="460" rx="24" fill="#ffffff"/>
+  <rect x="84" y="95" width="160" height="260" rx="18" fill="#e8f3ee" stroke="#b8d9ca"/>
+  <rect x="296" y="95" width="160" height="260" rx="18" fill="#f7f8f8" stroke="#dfe5e2"/>
+  <rect x="508" y="95" width="108" height="260" rx="18" fill="#f7f8f8" stroke="#dfe5e2"/>
+  <text x="164" y="225" text-anchor="middle" fill="#174d3d" font-family="system-ui" font-size="25" font-weight="900">Intro</text>
+  <text x="376" y="225" text-anchor="middle" fill="#202423" font-family="system-ui" font-size="25" font-weight="900">Activity</text>
+  <text x="562" y="225" text-anchor="middle" fill="#202423" font-family="system-ui" font-size="25" font-weight="900">Recruit</text>
+</svg>

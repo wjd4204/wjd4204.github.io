@@ -1,0 +1,74 @@
+---
+import SiteHeader from "../components/SiteHeader.astro";
+import "../styles/global.css";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const {
+  title = "JeongGon Park | Backend Developer",
+  description = "사용자의 입장에서 문제를 관찰하고 안정적인 서버 구조로 해결하는 백엔드 개발자 포트폴리오입니다."
+} = Astro.props;
+
+const pageTitle = title.includes("wjd4204") ? title : `${title} | wjd4204`;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.href} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{pageTitle}</title>
+    <script is:inline>
+      const storedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = storedTheme || (prefersDark ? "dark" : "light");
+    </script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <SiteHeader />
+      <main class="main">
+        <slot />
+      </main>
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <span>Backend Developer Portfolio</span>
+          <span>Built with Astro and Markdown</span>
+        </div>
+      </footer>
+      <button class="theme-toggle" type="button" aria-label="다크 모드 전환" aria-pressed="false">
+        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8a8.6 8.6 0 1 0 11.6 11.6Z" />
+        </svg>
+        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6" />
+        </svg>
+      </button>
+    </div>
+    <script is:inline>
+      const toggle = document.querySelector(".theme-toggle");
+      const syncThemeButton = () => {
+        const isDark = document.documentElement.dataset.theme === "dark";
+        toggle?.setAttribute("aria-pressed", String(isDark));
+      };
+
+      syncThemeButton();
+      toggle?.addEventListener("click", () => {
+        const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        document.documentElement.dataset.theme = nextTheme;
+        localStorage.setItem("theme", nextTheme);
+        syncThemeButton();
+      });
+    </script>
+  </body>
+</html>

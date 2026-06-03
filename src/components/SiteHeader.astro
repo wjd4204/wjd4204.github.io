@@ -1,0 +1,27 @@
+---
+const isHome = Astro.url.pathname === "/";
+const sectionHref = (id: string) => (isHome ? `#${id}` : `/#${id}`);
+
+const links = [
+  { href: sectionHref("home"), label: "Home" },
+  { href: sectionHref("about"), label: "About" },
+  { href: sectionHref("skills"), label: "Skill" },
+  { href: sectionHref("projects"), label: "Projects" }
+];
+---
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary navigation">
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>JeongGon Park</span>
+    </a>
+    <div class="nav-links">
+      {
+        links.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))
+      }
+    </div>
+  </nav>
+</header>

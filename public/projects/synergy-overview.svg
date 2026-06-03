@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460">
+  <rect width="720" height="460" rx="24" fill="#f7f8f8"/>
+  <rect x="80" y="88" width="560" height="284" rx="22" fill="#fff" stroke="#dfe5e2"/>
+  <circle cx="190" cy="230" r="54" fill="#e8f3ee" stroke="#24745a" stroke-width="4"/>
+  <rect x="310" y="154" width="220" height="46" rx="10" fill="#202423"/>
+  <rect x="310" y="230" width="260" height="22" rx="6" fill="#dfe5e2"/>
+  <rect x="310" y="286" width="190" height="22" rx="6" fill="#dfe5e2"/>
+  <text x="190" y="239" text-anchor="middle" fill="#174d3d" font-family="system-ui" font-size="34" font-weight="900">TDD</text>
+</svg>

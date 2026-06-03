@@ -1,0 +1,33 @@
+---
+type Props = {
+  index: number;
+  keyLabel: string;
+  title: string;
+  image: string;
+  imageAlt: string;
+  body: string[];
+  points?: string[];
+};
+
+const { index, keyLabel, title, image, imageAlt, body, points = [] } = Astro.props;
+---
+
+<section class="project-slide" aria-labelledby={`slide-${index}`}>
+  <div class="slide-media">
+    <img src={image} alt={imageAlt} loading={index === 1 ? "eager" : "lazy"} />
+  </div>
+  <div class="slide-copy">
+    <p class="slide-index">{String(index).padStart(2, "0")} / {keyLabel}</p>
+    <h2 id={`slide-${index}`}>{title}</h2>
+    <div class="slide-body">
+      {body.map((item) => <p>{item}</p>)}
+    </div>
+    {
+      points.length > 0 && (
+        <ul class="slide-points">
+          {points.map((point) => <li>{point}</li>)}
+        </ul>
+      )
+    }
+  </div>
+</section>

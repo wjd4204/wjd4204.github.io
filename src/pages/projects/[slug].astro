@@ -1,0 +1,116 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectSlide from "../../components/ProjectSlide.astro";
+import SkillLogo from "../../components/SkillLogo.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project }
+  }));
+}
+
+const { project } = Astro.props;
+const { title, description, summary, period, team, stack, role, status, repo, demo, slides } =
+  project.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <article>
+    <div class="container detail-topbar">
+      <a class="back-link" href="/#projects" aria-label="프로젝트 목록으로 돌아가기">← Back</a>
+    </div>
+    <header class="container project-hero">
+      <div>
+        <p class="eyebrow">{status}</p>
+        <h1>{title}</h1>
+        <p class="lead">{summary}</p>
+        <div class="tag-list" style="margin-top: 24px;">
+          {stack.map((item) => <span class="tag">{item}</span>)}
+        </div>
+      </div>
+      <aside class="hero-panel">
+        <ul class="status-list">
+          <li>
+            <strong>기간</strong>
+            <span>{period}</span>
+          </li>
+          <li>
+            <strong>인원</strong>
+            <span>{team}</span>
+          </li>
+          <li>
+            <strong>역할</strong>
+            <span>{role}</span>
+          </li>
+          {
+            repo && (
+              <li>
+                <strong>Repository</strong>
+                <span><a href={repo}>GitHub</a></span>
+              </li>
+            )
+          }
+          {
+            demo && (
+              <li>
+                <strong>Demo</strong>
+                <span><a href={demo}>Live demo</a></span>
+              </li>
+            )
+          }
+        </ul>
+      </aside>
+    </header>
+
+    <section class="project-tech-section section" aria-label={`${title} 사용 기술`}>
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Backend stack</p>
+            <h2>트러블슈팅 기준 기술 스택</h2>
+          </div>
+          <p>프로젝트에서 문제를 추적하고 해결할 때 직접 판단 기준으로 삼은 기술을 정리했습니다.</p>
+        </div>
+        <div class="project-tech-grid">
+          {
+            stack.map((item) => (
+              <div class="project-tech-card">
+                <SkillLogo name={item} />
+                <span>{item}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="slide-deck troubleshooting-deck" aria-label={`${title} 트러블슈팅 섹션`}>
+      <div class="container">
+        <div class="section-heading troubleshooting-heading">
+          <div>
+            <p class="eyebrow">Troubleshooting</p>
+            <h2>백엔드 관점의 문제 추적과 해결</h2>
+          </div>
+          <p>기능 소개보다 문제 상황, 원인 가설, 선택한 해결 방식, 남은 개선점을 중심으로 읽히도록 구성했습니다.</p>
+        </div>
+        {
+          slides.map((slide, index) => (
+            <ProjectSlide
+              index={index + 1}
+              keyLabel={slide.key}
+              title={slide.title}
+              image={slide.image}
+              imageAlt={slide.imageAlt}
+              body={slide.body}
+              points={slide.points}
+            />
+          ))
+        }
+      </div>
+    </section>
+  </article>
+</BaseLayout>

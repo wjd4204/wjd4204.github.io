@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wjd4204.github.io/sitemap-index.xml
