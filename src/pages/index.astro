@@ -10,7 +10,7 @@ const projects = (await getCollection("projects"))
 const about = {
   name: "박정곤",
   university: "세종대학교(지능기전공학부 무인이동체공학과)",
-  phone: "📞 +82 10-4204-3473",
+  phone: "+82 10-4204-3473",
   tistory: "https://wjd4204.tistory.com",
   github: "https://github.com/wjd4204",
   introduction:
@@ -47,6 +47,38 @@ const stacks = [
 
 <BaseLayout title="wjd4204 | Backend Developer">
   <section class="container hero" id="home">
+    <div class="hero-particles" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
     <div>
       <p class="eyebrow">사용자의 입장에서 움직이는 백엔드 개발자</p>
       <h1>
@@ -104,27 +136,39 @@ const stacks = [
         </div>
         <p>익숙한 도구를 나열하는 데서 멈추지 않고, 문제 상황에 맞는 이유를 함께 고민합니다.</p>
       </div>
-      <div class="skill-accordion">
+      <div class="skill-tabs" data-skill-tabs>
+        <div class="skill-tab-list" role="tablist" aria-label="기술 스택 카테고리">
+          {
+            stacks.map((stackGroup, index) => (
+              <button
+                aria-controls={`skill-panel-${index}`}
+                aria-selected={index === 0 ? "true" : "false"}
+                class="skill-tab"
+                id={`skill-tab-${index}`}
+                role="tab"
+                type="button"
+              >
+                {stackGroup.group}
+              </button>
+            ))
+          }
+        </div>
         {
-          stacks.map((stackGroup) => (
-            <details class="skill-panel">
-              <summary>
-                <span>{stackGroup.group}</span>
-                <span class="summary-mark" aria-hidden="true">+</span>
-              </summary>
-              <div class="skill-panel-body">
-                <div class="tag-list">
-                  {
-                    stackGroup.items.map((item) => (
-                      <span class="tag skill-tag">
-                        <SkillLogo name={item} />
-                        <span>{item}</span>
-                      </span>
-                    ))
-                  }
-                </div>
-              </div>
-            </details>
+          stacks.map((stackGroup, index) => (
+            <div
+              aria-labelledby={`skill-tab-${index}`}
+              class="skill-tab-panel"
+              hidden={index !== 0}
+              id={`skill-panel-${index}`}
+              role="tabpanel"
+            >
+              {stackGroup.items.map((item) => (
+                <span class="skill-tile">
+                  <SkillLogo name={item} />
+                  <span>{item}</span>
+                </span>
+              ))}
+            </div>
           ))
         }
       </div>
@@ -140,9 +184,27 @@ const stacks = [
         </div>
         <p>SOUF, TAVE Website, Synergy의 문제 정의와 백엔드 설계 판단을 슬라이드형 상세 페이지로 정리했습니다.</p>
       </div>
-      <div class="grid">
+      <div class="project-board">
         {projects.slice(0, 3).map((project) => <ProjectCard project={project} />)}
       </div>
     </div>
   </section>
+  <script is:inline>
+    document.querySelectorAll("[data-skill-tabs]").forEach((root) => {
+      const tabs = Array.from(root.querySelectorAll("[role='tab']"));
+      const panels = Array.from(root.querySelectorAll("[role='tabpanel']"));
+
+      tabs.forEach((tab, activeIndex) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((item, index) => {
+            item.setAttribute("aria-selected", String(index === activeIndex));
+          });
+
+          panels.forEach((panel, index) => {
+            panel.hidden = index !== activeIndex;
+          });
+        });
+      });
+    });
+  </script>
 </BaseLayout>

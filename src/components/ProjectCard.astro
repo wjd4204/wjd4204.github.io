@@ -11,17 +11,19 @@ const { title, description, summary, role, status, image, imageAlt, hoverImage, 
 ---
 
 <a class="project-card" href={`/projects/${project.id}/`}>
-  <div class="project-card-copy">
-    <h3>{title}</h3>
-    <p class="project-description">{description}</p>
+  <div class="project-card-content">
+    <div class="project-card-copy">
+      <h3>{title}</h3>
+      <p class="project-description">{description}</p>
+      <p class="project-purpose">{summary}</p>
+    </div>
+    <div class="meta-row">
+      <span class="tag">{status}</span>
+      <span class="tag">{role}</span>
+    </div>
   </div>
   <span class="project-card-media">
     <img class="project-card-image primary" src={image} alt={imageAlt} loading="lazy" />
     <img class="project-card-image secondary" src={hoverImage} alt={hoverImageAlt} loading="lazy" />
   </span>
-  <p class="project-purpose">{summary}</p>
-  <div class="meta-row">
-    <span class="tag">{status}</span>
-    <span class="tag">{role}</span>
-  </div>
 </a>
