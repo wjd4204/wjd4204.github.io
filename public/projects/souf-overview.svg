@@ -4,13 +4,13 @@
   <rect width="720" height="460" rx="24" fill="#f7f8f8"/>
   <path d="M92 230h524" stroke="#dfe5e2" stroke-width="3"/>
   <rect x="62" y="150" width="160" height="160" rx="18" fill="#fff" stroke="#dfe5e2"/>
-  <rect x="300" y="118" width="120" height="224" rx="18" fill="#e8f3ee" stroke="#b8d9ca"/>
+  <rect x="300" y="118" width="120" height="224" rx="18" fill="#EFF6FF" stroke="#b8d9ca"/>
   <rect x="498" y="150" width="160" height="160" rx="18" fill="#fff" stroke="#dfe5e2"/>
-  <circle cx="142" cy="210" r="28" fill="#24745a"/>
+  <circle cx="142" cy="210" r="28" fill="#2563EB"/>
   <path d="M104 260h76" stroke="#202423" stroke-width="10" stroke-linecap="round"/>
-  <path d="M331 194h58M331 230h58M331 266h58" stroke="#174d3d" stroke-width="12" stroke-linecap="round"/>
+  <path d="M331 194h58M331 230h58M331 266h58" stroke="#1D4ED8" stroke-width="12" stroke-linecap="round"/>
   <path d="M530 210h86M530 252h66" stroke="#202423" stroke-width="12" stroke-linecap="round"/>
   <text x="142" y="346" text-anchor="middle" fill="#66706c" font-family="system-ui" font-size="24" font-weight="700">Student</text>
-  <text x="360" y="386" text-anchor="middle" fill="#174d3d" font-family="system-ui" font-size="24" font-weight="800">Matching API</text>
+  <text x="360" y="386" text-anchor="middle" fill="#1D4ED8" font-family="system-ui" font-size="24" font-weight="800">Matching API</text>
   <text x="578" y="346" text-anchor="middle" fill="#66706c" font-family="system-ui" font-size="24" font-weight="700">Company</text>
 </svg>

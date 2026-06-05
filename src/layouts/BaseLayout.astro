@@ -25,7 +25,7 @@ const pageTitle = title.includes("wjd4204") ? title : `${title} | wjd4204`;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url.href} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="https://img.icons8.com/cotton/64/code.png" type="image/png" sizes="64x64" />
     <title>{pageTitle}</title>
     <script is:inline>
       const storedTheme = localStorage.getItem("theme");
@@ -42,7 +42,6 @@ const pageTitle = title.includes("wjd4204") ? title : `${title} | wjd4204`;
       <footer class="site-footer">
         <div class="footer-inner">
           <span>Backend Developer Portfolio</span>
-          <span>Built with Astro and Markdown</span>
         </div>
       </footer>
       <button class="theme-toggle" type="button" aria-label="다크 모드 전환" aria-pressed="false">
@@ -69,6 +68,63 @@ const pageTitle = title.includes("wjd4204") ? title : `${title} | wjd4204`;
         localStorage.setItem("theme", nextTheme);
         syncThemeButton();
       });
+
+      const sectionFrames = Array.from(
+        document.querySelectorAll(".about-layout, .section-frame")
+      );
+
+      if (sectionFrames.length > 0) {
+        let ticking = false;
+
+        const syncActiveSection = () => {
+          const marker = window.innerHeight * 0.42;
+          const visibleFrames = sectionFrames
+            .map((frame) => {
+              const rect = frame.getBoundingClientRect();
+              return {
+                distance: Math.abs(rect.top - marker),
+                frame,
+                rect
+              };
+            })
+            .filter(({ rect }) => rect.top <= marker && rect.bottom >= marker)
+            .sort((a, b) => a.distance - b.distance);
+          let activeFrame = visibleFrames[0]?.frame;
+
+          if (!activeFrame) {
+            activeFrame = sectionFrames
+              .map((frame) => {
+                const rect = frame.getBoundingClientRect();
+                return {
+                  distance: Math.abs(rect.top - marker),
+                  frame
+                };
+              })
+              .sort((a, b) => a.distance - b.distance)[0]?.frame;
+          }
+
+          sectionFrames.forEach((frame) => {
+            frame.classList.toggle("is-section-active", frame === activeFrame);
+          });
+        };
+
+        const requestActiveSectionSync = () => {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(() => {
+            syncActiveSection();
+            ticking = false;
+          });
+        };
+
+        syncActiveSection();
+        window.setTimeout(syncActiveSection, 120);
+        window.addEventListener("scroll", requestActiveSectionSync, { passive: true });
+        window.addEventListener("resize", requestActiveSectionSync);
+        window.addEventListener("hashchange", () => {
+          window.setTimeout(syncActiveSection, 120);
+        });
+      }
     </script>
   </body>
 </html>

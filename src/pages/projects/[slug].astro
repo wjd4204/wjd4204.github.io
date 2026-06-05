@@ -16,6 +16,30 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { title, description, summary, period, team, stack, role, status, repo, demo, slides } =
   project.data;
+
+const stackReasonMap: Record<string, string> = {
+  Java: "타입 안정성과 객체지향 설계를 바탕으로 서버 도메인 로직을 안정적으로 구현하기 위해 사용했습니다.",
+  "Java 17": "타입 안정성과 장기 지원 버전을 기준으로 서버 도메인 로직을 안정적으로 구현하기 위해 사용했습니다.",
+  "Spring Boot": "API 서버 구성, 의존성 관리, 운영 환경 설정을 빠르게 표준화하기 위해 선택했습니다.",
+  JPA: "도메인 객체와 관계형 데이터의 흐름을 일관되게 연결하고, 트랜잭션 중심으로 데이터를 다루기 위해 사용했습니다.",
+  "Spring Data JPA": "반복적인 CRUD 구현을 줄이고 도메인 중심의 데이터 접근 흐름을 만들기 위해 사용했습니다.",
+  "Spring Cache": "조회 빈도가 높은 데이터의 응답 시간을 줄이고 DB 부하를 낮추기 위해 적용했습니다.",
+  Querydsl: "복잡한 조회 조건을 타입 안정성 있게 조합하고, 동적 쿼리의 유지보수성을 높이기 위해 사용했습니다.",
+  MySQL: "관계형 데이터 모델과 트랜잭션이 중요한 핵심 비즈니스 데이터를 저장하기 위해 사용했습니다.",
+  PostgreSQL: "정교한 관계형 데이터 처리와 확장성을 고려해야 하는 저장소로 활용했습니다.",
+  MongoDB: "유연한 문서 구조가 필요한 데이터 저장과 빠른 스키마 변경 대응을 위해 선택했습니다.",
+  Redis: "캐싱, 랭킹, 분산락처럼 빠른 메모리 기반 처리가 필요한 지점에 사용했습니다.",
+  Docker: "실행 환경 차이를 줄이고 배포/테스트 환경을 일관되게 관리하기 위해 사용했습니다.",
+  AWS: "서비스 배포, 인프라 구성, 운영 환경 확장을 고려해 활용했습니다.",
+  Redisson: "분산 환경에서 동시성 제어가 필요한 구간을 안정적으로 처리하기 위해 사용했습니다.",
+  "JUnit5": "기능 변경 시 회귀를 줄이고, 문제 해결 과정을 테스트로 검증하기 위해 사용했습니다.",
+  Mockito: "외부 의존성을 격리하고 서비스 로직의 조건별 동작을 집중적으로 검증하기 위해 사용했습니다.",
+  "GitHub Actions": "반복 배포와 검증 과정을 자동화해 변경 사항을 안정적으로 반영하기 위해 사용했습니다.",
+  Nginx: "정적 리소스 제공, 리버스 프록시, 요청 흐름 제어를 안정적으로 처리하기 위해 사용했습니다."
+};
+
+const getStackReason = (item: string) =>
+  stackReasonMap[item] ?? "프로젝트 문제를 해결하는 과정에서 필요한 역할과 트레이드오프를 기준으로 선택했습니다.";
 ---
 
 <BaseLayout title={title} description={description}>
@@ -28,9 +52,6 @@ const { title, description, summary, period, team, stack, role, status, repo, de
         <p class="eyebrow">{status}</p>
         <h1>{title}</h1>
         <p class="lead">{summary}</p>
-        <div class="tag-list" style="margin-top: 24px;">
-          {stack.map((item) => <span class="tag">{item}</span>)}
-        </div>
       </div>
       <aside class="hero-panel">
         <ul class="status-list">
@@ -67,20 +88,22 @@ const { title, description, summary, period, team, stack, role, status, repo, de
     </header>
 
     <section class="project-tech-section section" aria-label={`${title} 사용 기술`}>
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Backend stack</p>
-            <h2>트러블슈팅 기준 기술 스택</h2>
-          </div>
+      <div class="container section-frame">
+        <div class="section-heading section-frame-heading">
+          <span class="section-number">01.</span>
+          <p class="eyebrow">Backend stack</p>
+          <h2>트러블슈팅 기준 기술 스택</h2>
           <p>프로젝트에서 문제를 추적하고 해결할 때 직접 판단 기준으로 삼은 기술을 정리했습니다.</p>
         </div>
-        <div class="project-tech-grid">
+        <div class="project-tech-grid section-frame-body">
           {
             stack.map((item) => (
               <div class="project-tech-card">
-                <SkillLogo name={item} />
-                <span>{item}</span>
+                <div class="project-tech-card-title">
+                  <SkillLogo name={item} />
+                  <strong>{item}</strong>
+                </div>
+                <p>{getStackReason(item)}</p>
               </div>
             ))
           }
@@ -89,27 +112,28 @@ const { title, description, summary, period, team, stack, role, status, repo, de
     </section>
 
     <section class="slide-deck troubleshooting-deck" aria-label={`${title} 트러블슈팅 섹션`}>
-      <div class="container">
-        <div class="section-heading troubleshooting-heading">
-          <div>
-            <p class="eyebrow">Troubleshooting</p>
-            <h2>백엔드 관점의 문제 추적과 해결</h2>
-          </div>
+      <div class="container section-frame">
+        <div class="section-heading section-frame-heading troubleshooting-heading">
+          <span class="section-number">02.</span>
+          <p class="eyebrow">Troubleshooting</p>
+          <h2>백엔드 관점의 문제 추적과 해결</h2>
           <p>기능 소개보다 문제 상황, 원인 가설, 선택한 해결 방식, 남은 개선점을 중심으로 읽히도록 구성했습니다.</p>
         </div>
-        {
-          slides.map((slide, index) => (
-            <ProjectSlide
-              index={index + 1}
-              keyLabel={slide.key}
-              title={slide.title}
-              image={slide.image}
-              imageAlt={slide.imageAlt}
-              body={slide.body}
-              points={slide.points}
-            />
-          ))
-        }
+        <div class="project-slide-list section-frame-body">
+          {
+            slides.map((slide, index) => (
+              <ProjectSlide
+                index={index + 1}
+                keyLabel={slide.key}
+                title={slide.title}
+                image={slide.image}
+                imageAlt={slide.imageAlt}
+                body={slide.body}
+                points={slide.points}
+              />
+            ))
+          }
+        </div>
       </div>
     </section>
   </article>

@@ -6,7 +6,7 @@ type Props = {
 };
 
 const { project } = Astro.props;
-const { title, description, summary, role, status, image, imageAlt, hoverImage, hoverImageAlt } =
+const { title, description, role, status, image, imageAlt, hoverImage, hoverImageAlt } =
   project.data;
 ---
 
@@ -15,7 +15,6 @@ const { title, description, summary, role, status, image, imageAlt, hoverImage, 
     <div class="project-card-copy">
       <h3>{title}</h3>
       <p class="project-description">{description}</p>
-      <p class="project-purpose">{summary}</p>
     </div>
     <div class="meta-row">
       <span class="tag">{status}</span>

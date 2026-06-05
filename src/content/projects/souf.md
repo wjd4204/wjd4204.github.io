@@ -1,13 +1,13 @@
 ---
 title: "SOUF"
-description: "대학생과 기업을 연결하는 매칭 플랫폼"
+description: "대학생과 기업 간 외주 매칭 플랫폼"
 summary: "대학생의 성장 기회와 기업의 프로젝트 수요를 연결하는 매칭 플랫폼입니다."
 date: 2026-06-02
-period: "2024.03 - 2024.06"
-team: "Backend 2명 / Frontend 3명"
+period: "2025.01 - 2026.01"
+team: "FE 2인, BE 2인, Marketing 1인, AI 1인"
 stack: ["Java", "Spring Boot", "JPA", "MySQL", "AWS"]
-role: "Backend API 설계 및 매칭 도메인 구현"
-status: "Representative"
+role: "PM 및 백엔드 설계 및 기능 구현 담당"
+status: "Representive"
 image: "/projects/souf-overview.svg"
 imageAlt: "SOUF 플랫폼의 학생과 기업 매칭 흐름 다이어그램"
 hoverImage: "/projects/souf-result.svg"
@@ -23,7 +23,7 @@ slides:
       - "백엔드에서는 사용자 프로필, 기업 프로젝트, 지원 및 매칭 상태를 일관된 흐름으로 관리하는 데 집중했습니다."
     points:
       - "기간: 2024.03 - 2024.06"
-      - "인원: Backend 2명 / Frontend 3명"
+      - "인원: FE 2인, BE 2인, Marketing 1인, AI 1인"
       - "역할: 매칭 도메인 API, 프로젝트 지원 상태 관리"
       - "기술: Java, Spring Boot, JPA, MySQL, AWS"
   - key: "Problem"

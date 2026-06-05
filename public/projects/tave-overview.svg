@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460">
   <rect width="720" height="460" rx="24" fill="#f7f8f8"/>
   <rect x="88" y="88" width="544" height="300" rx="20" fill="#fff" stroke="#dfe5e2"/>
-  <rect x="124" y="128" width="166" height="210" rx="14" fill="#e8f3ee"/>
+  <rect x="124" y="128" width="166" height="210" rx="14" fill="#EFF6FF"/>
   <rect x="322" y="128" width="198" height="32" rx="8" fill="#202423"/>
   <rect x="322" y="190" width="270" height="22" rx="6" fill="#dfe5e2"/>
   <rect x="322" y="240" width="230" height="22" rx="6" fill="#dfe5e2"/>
-  <rect x="322" y="290" width="160" height="36" rx="8" fill="#24745a"/>
-  <text x="207" y="238" text-anchor="middle" fill="#174d3d" font-family="system-ui" font-size="34" font-weight="900">TAVE</text>
+  <rect x="322" y="290" width="160" height="36" rx="8" fill="#2563EB"/>
+  <text x="207" y="238" text-anchor="middle" fill="#1D4ED8" font-family="system-ui" font-size="34" font-weight="900">TAVE</text>
 </svg>

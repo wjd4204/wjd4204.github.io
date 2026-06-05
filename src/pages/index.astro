@@ -11,41 +11,57 @@ const about = {
   name: "박정곤",
   university: "세종대학교(지능기전공학부 무인이동체공학과)",
   phone: "+82 10-4204-3473",
-  tistory: "https://wjd4204.tistory.com",
+  tistory: "https://gony-dev.tistory.com/",
   github: "https://github.com/wjd4204",
   introduction:
-    "사용자가 되어 생각하고, 개발자로 해결하는 박정곤입니다."
+    "사용자가 되어 생각하고, 개발자로 해결합니다."
 };
 
 const aboutIntroductions = [
-  "사용자가 불편함을 느끼는 순간, 저는 개발자이기 전에 한 명의 사용자가 되어 먼저 생각합니다. 이 관점을 바탕으로 대학생과 기업을 연결하는 외주 매칭 플랫폼 “SOUF”를 총괄 설계하고 운영하며 서비스가 사용자에게 닿는 전 과정을 직접 경험했습니다. Dead Click 분석을 통해 회원가입 흐름을 재설계하여 이탈률을 5%대로 감소시키는 실질적인 수치를 달성했습니다. 이처럼 사용자의 시선으로 문제를 발견하고, 개발자의 언어로 해결하는 방식으로 성장하고 있습니다. 저는 AI를 단순 도구가 아닌 개발 역량을 확장하고 함께 성장하는 파트너로 대합니다. AI와의 반복적인 협업 속에서 저는 문제를 구조화하는 능력을 향상시키는 동시에 AI는 저의 맥락을 학습하며 제안의 정확도가 높아졌습니다. AI 생태계가 빠르게 진화할수록 AI를 잘 활용하는 개발자가 더 나은 서비스를 만든다고 생각하며 앞으로도 성장해 나가겠습니다."
+  {
+    title: "[ 사용자의 시선으로 문제를 발견하는 실전 경험 ]",
+    body: [
+      "사용자가 불편함을 느끼는 순간, 저는 개발자이기 전에 한 명의 사용자가 되어 먼저 생각합니다. Google Analytics Dead Click 분석을 통해 회원가입 흐름을 재설계하여 이탈률을 31%에서 5%대로 감소시키고, MS Clarity로 이미지 로딩 병목을 식별해 WebP 변환을 적용한 것처럼, 데이터를 근거로 사용자 경험을 개선하는 것을 중요하게 생각합니다."
+    ]
+  },
+  {
+    title: "[ 기술 선택에 근거를 갖는 개발자 ]",
+    body: [
+      "기술을 선택할 때 선택한 것에 대한 이유를 먼저 묻습니다. 포인트 랭킹의 실시간성이 낮다는 것을 분석해 Redis 캐싱을 도입하고, 낙관적 락 대비 분산 환경 적합성을 고려해 Redisson 분산락을 선택한 것처럼, 트레이드오프를 따지고 측정 가능한 결과로 증명하는 방식으로 성장하고 있습니다."
+    ]
+  }
 ];
 
 const stacks = [
   {
     group: "Language",
+    summary: "주력 언어와 런타임 이해를 바탕으로 안정적인 서버 코드를 작성합니다.",
     items: ["Java 17"]
   },
   {
     group: "Framework / Library",
+    summary: "Spring 기반 API, 데이터 접근, 캐싱, 동적 쿼리 설계를 프로젝트에 맞게 선택합니다.",
     items: ["Spring Boot", "Spring Data JPA", "Spring Cache", "Querydsl"]
   },
   {
-    group: "Database / Server",
-    items: ["MySQL", "PostgreSQL", "MongoDB", "Redis", "AWS"]
+    group: "Database",
+    summary: "관계형 데이터 모델링과 캐시/문서형 저장소를 문제 성격에 맞게 조합합니다.",
+    items: ["MySQL", "PostgreSQL", "MongoDB", "Redis"]
   },
   {
-    group: "Tools",
-    items: ["Docker", "SQLTron", "DBeaver", "Figma"]
+    group: "Infra / Cloud",
+    summary: "배포와 운영 환경을 고려해 컨테이너와 클라우드 기반 실행 환경을 다룹니다.",
+    items: ["Docker", "AWS"]
   },
   {
     group: "ETC",
-    items: ["GitHub", "Notion", "Jira", "Slack"]
+    summary: "협업과 의사결정 기록을 남기며, 문제 해결 과정을 팀과 공유합니다.",
+    items: ["Notion", "Jira", "Confluence", "Slack"]
   }
 ];
 ---
 
-<BaseLayout title="wjd4204 | Backend Developer">
+<BaseLayout title="박정곤 | Backend Developer">
   <section class="container hero" id="home">
     <div class="hero-particles" aria-hidden="true">
       <span></span>
@@ -79,26 +95,31 @@ const stacks = [
       <span></span>
       <span></span>
     </div>
-    <div>
-      <p class="eyebrow">사용자의 입장에서 움직이는 백엔드 개발자</p>
+    <div class="hero-content">
+      <p class="hero-kicker">Turning Ideas From Experience</p>
       <h1>
-        <span>사용자가 되어 생각하고,</span>
-        <span>개발자로 해결합니다.</span>
+        <span>Park JeongGon</span>
       </h1>
+      <p class="hero-role">Backend Developer Portfolio</p>
       <p class="lead">
-        서비스의 흐름을 관찰하고 병목을 줄이며, 읽기 쉬운 API와 안정적인 데이터 구조를
-        설계하는 데 집중합니다. 프로젝트를 통해 문제 정의, 기술 선택, 해결 과정을 기록합니다.
+        사용자의 불편함을 데이터로 발견하고, 안정적인 서버 구조와 근거 있는 기술 선택으로
+        문제를 해결합니다.
       </p>
-      <div class="link-row" style="margin-top: 28px;">
+      <div class="link-row hero-actions">
         <a class="button" href="#projects">프로젝트 보기</a>
         <a class="button secondary" href="#about">소개 보기</a>
       </div>
+      <a class="scroll-cue" href="#about" aria-label="About me 섹션으로 이동">
+        <span>SCROLL</span>
+        <span aria-hidden="true">⌄</span>
+      </a>
     </div>
   </section>
 
   <section class="section about-section" id="about">
     <div class="container about-layout">
       <div class="about-heading">
+        <span class="section-number">01.</span>
         <p class="eyebrow">About me</p>
         <h2>{about.name}</h2>
         <p>{about.introduction}</p>
@@ -106,69 +127,61 @@ const stacks = [
       <div class="about-panel">
         <dl class="profile-list">
           <div>
-            <dt>대학교</dt>
+            <dt>🏫 대학교</dt>
             <dd>{about.university}</dd>
           </div>
           <div>
-            <dt>연락처</dt>
+            <dt>📞 연락처</dt>
             <dd>{about.phone}</dd>
           </div>
           <div>
-            <dt>Tistory</dt>
+            <dt>📑 블로그</dt>
             <dd><a href={about.tistory}>{about.tistory}</a></dd>
           </div>
           <div>
-            <dt>GitHub</dt>
+            <dt>💻 GitHub</dt>
             <dd><a href={about.github}>{about.github}</a></dd>
           </div>
         </dl>
       </div>
-      <p class="about-intro">{aboutIntroductions[0]}</p>
+      <div class="about-intro">
+        {
+          aboutIntroductions.map((intro) => (
+            <section class="about-intro-block">
+              <h3>{intro.title}</h3>
+              {intro.body.map((paragraph) => <p>{paragraph}</p>)}
+            </section>
+          ))
+        }
+      </div>
     </div>
   </section>
 
   <section class="section skills-section" id="skills">
-    <div class="container">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Tech stack</p>
-          <h2>사용 가능한 기술 스택</h2>
-        </div>
-        <p>익숙한 도구를 나열하는 데서 멈추지 않고, 문제 상황에 맞는 이유를 함께 고민합니다.</p>
+    <div class="container section-frame">
+      <div class="section-heading section-frame-heading">
+        <span class="section-number">02.</span>
+        <p class="eyebrow">Tech stack</p>
+        <h2>기술 스택</h2>
+        <p>익숙한 도구를 나열하는 데서 멈추지 않고, 문제 상황에 맞는 이유를 고민합니다.</p>
       </div>
-      <div class="skill-tabs" data-skill-tabs>
-        <div class="skill-tab-list" role="tablist" aria-label="기술 스택 카테고리">
-          {
-            stacks.map((stackGroup, index) => (
-              <button
-                aria-controls={`skill-panel-${index}`}
-                aria-selected={index === 0 ? "true" : "false"}
-                class="skill-tab"
-                id={`skill-tab-${index}`}
-                role="tab"
-                type="button"
-              >
-                {stackGroup.group}
-              </button>
-            ))
-          }
-        </div>
+      <div class="skill-archive section-frame-body">
         {
-          stacks.map((stackGroup, index) => (
-            <div
-              aria-labelledby={`skill-tab-${index}`}
-              class="skill-tab-panel"
-              hidden={index !== 0}
-              id={`skill-panel-${index}`}
-              role="tabpanel"
-            >
-              {stackGroup.items.map((item) => (
-                <span class="skill-tile">
-                  <SkillLogo name={item} />
-                  <span>{item}</span>
-                </span>
-              ))}
-            </div>
+          stacks.map((stackGroup) => (
+            <section class="skill-group-card">
+              <div class="skill-group-copy">
+                <h3>{stackGroup.group}</h3>
+                <p>{stackGroup.summary}</p>
+              </div>
+              <div class="skill-chip-list">
+                {stackGroup.items.map((item) => (
+                  <span class="skill-tile">
+                    <SkillLogo name={item} />
+                    <span>{item}</span>
+                  </span>
+                ))}
+              </div>
+            </section>
           ))
         }
       </div>
@@ -176,35 +189,16 @@ const stacks = [
   </section>
 
   <section class="section projects-section" id="projects">
-    <div class="container">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Selected projects</p>
-          <h2>Projects</h2>
-        </div>
-        <p>SOUF, TAVE Website, Synergy의 문제 정의와 백엔드 설계 판단을 슬라이드형 상세 페이지로 정리했습니다.</p>
+    <div class="container section-frame">
+      <div class="section-heading section-frame-heading">
+        <span class="section-number">03.</span>
+        <p class="eyebrow">Selected projects</p>
+        <h2>프로젝트</h2>
+        <p>문제 정의와 백엔드 설계 판단을 상세 페이지로 정리했습니다.</p>
       </div>
-      <div class="project-board">
+      <div class="project-board section-frame-body">
         {projects.slice(0, 3).map((project) => <ProjectCard project={project} />)}
       </div>
     </div>
   </section>
-  <script is:inline>
-    document.querySelectorAll("[data-skill-tabs]").forEach((root) => {
-      const tabs = Array.from(root.querySelectorAll("[role='tab']"));
-      const panels = Array.from(root.querySelectorAll("[role='tabpanel']"));
-
-      tabs.forEach((tab, activeIndex) => {
-        tab.addEventListener("click", () => {
-          tabs.forEach((item, index) => {
-            item.setAttribute("aria-selected", String(index === activeIndex));
-          });
-
-          panels.forEach((panel, index) => {
-            panel.hidden = index !== activeIndex;
-          });
-        });
-      });
-    });
-  </script>
 </BaseLayout>

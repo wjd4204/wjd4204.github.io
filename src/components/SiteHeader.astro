@@ -5,7 +5,7 @@ const sectionHref = (id: string) => (isHome ? `#${id}` : `/#${id}`);
 const links = [
   { href: sectionHref("home"), label: "Home" },
   { href: sectionHref("about"), label: "About" },
-  { href: sectionHref("skills"), label: "Skill" },
+  { href: sectionHref("skills"), label: "Skills" },
   { href: sectionHref("projects"), label: "Projects" }
 ];
 ---
@@ -14,7 +14,7 @@ const links = [
   <nav class="nav" aria-label="Primary navigation">
     <a class="brand" href="/">
       <span class="brand-mark" aria-hidden="true"></span>
-      <span>JeongGon Park</span>
+      <span>JeongGon's Portfolio</span>
     </a>
     <div class="nav-links">
       {

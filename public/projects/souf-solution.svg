@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460">
   <rect width="720" height="460" rx="24" fill="#ffffff"/>
   <rect x="78" y="82" width="564" height="78" rx="16" fill="#f7f8f8" stroke="#dfe5e2"/>
-  <rect x="78" y="206" width="250" height="150" rx="16" fill="#e8f3ee" stroke="#b8d9ca"/>
+  <rect x="78" y="206" width="250" height="150" rx="16" fill="#EFF6FF" stroke="#b8d9ca"/>
   <rect x="392" y="206" width="250" height="150" rx="16" fill="#f7f8f8" stroke="#dfe5e2"/>
-  <path d="M188 160v46M520 160v46" stroke="#24745a" stroke-width="4"/>
+  <path d="M188 160v46M520 160v46" stroke="#2563EB" stroke-width="4"/>
   <text x="360" y="130" text-anchor="middle" fill="#202423" font-family="system-ui" font-size="23" font-weight="800">Role-based API</text>
-  <text x="203" y="286" text-anchor="middle" fill="#174d3d" font-family="system-ui" font-size="24" font-weight="800">Student Flow</text>
+  <text x="203" y="286" text-anchor="middle" fill="#1D4ED8" font-family="system-ui" font-size="24" font-weight="800">Student Flow</text>
   <text x="517" y="286" text-anchor="middle" fill="#202423" font-family="system-ui" font-size="24" font-weight="800">Company Flow</text>
 </svg>

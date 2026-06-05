@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460">
   <rect width="720" height="460" rx="24" fill="#ffffff"/>
-  <rect x="112" y="98" width="496" height="72" rx="14" fill="#e8f3ee" stroke="#b8d9ca"/>
+  <rect x="112" y="98" width="496" height="72" rx="14" fill="#EFF6FF" stroke="#b8d9ca"/>
   <rect x="112" y="208" width="496" height="72" rx="14" fill="#f7f8f8" stroke="#dfe5e2"/>
   <rect x="112" y="318" width="496" height="72" rx="14" fill="#f7f8f8" stroke="#dfe5e2"/>
-  <text x="360" y="143" text-anchor="middle" fill="#174d3d" font-family="system-ui" font-size="23" font-weight="900">Duplicate application</text>
+  <text x="360" y="143" text-anchor="middle" fill="#1D4ED8" font-family="system-ui" font-size="23" font-weight="900">Duplicate application</text>
   <text x="360" y="253" text-anchor="middle" fill="#202423" font-family="system-ui" font-size="23" font-weight="900">Capacity exceeded</text>
   <text x="360" y="363" text-anchor="middle" fill="#202423" font-family="system-ui" font-size="23" font-weight="900">Invalid state change</text>
 </svg>
