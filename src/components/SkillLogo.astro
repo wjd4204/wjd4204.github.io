@@ -34,6 +34,11 @@ const iconMap = [
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
   },
   {
+    match: "redisson",
+    id: "redisson",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg"
+  },
+  {
     match: "redis",
     id: "redis",
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg"
@@ -61,7 +66,25 @@ const iconMap = [
   { match: "confluence", id: "confluence", src: "https://img.icons8.com/fluency/48/confluence.png" },
   { match: "notion", id: "notion", src: "https://cdn.simpleicons.org/notion/000000/ffffff" },
   { match: "jira", id: "jira", src: "https://cdn.simpleicons.org/jira" },
-  { match: "slack", id: "slack", src: "https://img.icons8.com/color/48/slack-new.png" }
+  { match: "slack", id: "slack", src: "https://img.icons8.com/color/48/slack-new.png" },
+  { match: "querydsl", id: "querydsl", src: "https://img.icons8.com/fluency/48/database.png" },
+  { match: "jacoco", id: "jacoco", src: "https://www.jacoco.org/jacoco/trunk/doc/resources/report.gif" },
+  { match: "google analytics", id: "google-analytics", src: "https://img.icons8.com/color/48/google-analytics.png" },
+  {
+    match: "ms clarity",
+    id: "ms-clarity",
+    src: "https://img.icons8.com/external-creatype-glyph-colourcreatype/64/external-clarity-tools-design-creatype-glyph-colourcreatype.png"
+  },
+  {
+    match: "microsoft clarity",
+    id: "microsoft-clarity",
+    src: "https://img.icons8.com/external-creatype-glyph-colourcreatype/64/external-clarity-tools-design-creatype-glyph-colourcreatype.png"
+  },
+  {
+    match: "clarity",
+    id: "clarity",
+    src: "https://img.icons8.com/external-creatype-glyph-colourcreatype/64/external-clarity-tools-design-creatype-glyph-colourcreatype.png"
+  }
 ];
 
 const matchedIcon = iconMap.find((icon) => key.includes(icon.match));

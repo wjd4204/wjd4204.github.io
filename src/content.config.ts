@@ -1,8 +1,5 @@
 import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
-
 const projects = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -13,13 +10,21 @@ const projects = defineCollection({
     stack: z.array(z.string()),
     role: z.string(),
     status: z.string(),
+    card: z.object({
+      badge: z.string(),
+      device: z.enum(["laptop", "phones"]).default("laptop"),
+      image: z.string(),
+      imageAlt: z.string(),
+      secondaryImage: z.string().optional(),
+      secondaryImageAlt: z.string().optional()
+    }),
     image: z.string(),
     imageAlt: z.string(),
     hoverImage: z.string(),
     hoverImageAlt: z.string(),
     slides: z.array(
       z.object({
-        key: z.enum(["Overview", "Problem", "Tech Choice", "Solution", "Result"]),
+        key: z.string(),
         title: z.string(),
         image: z.string(),
         imageAlt: z.string(),

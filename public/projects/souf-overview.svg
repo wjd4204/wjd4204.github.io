@@ -1,16 +1,77 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460" role="img" aria-labelledby="title desc">
-  <title id="title">SOUF overview</title>
-  <desc id="desc">Students and companies are matched through projects.</desc>
-  <rect width="720" height="460" rx="24" fill="#f7f8f8"/>
-  <path d="M92 230h524" stroke="#dfe5e2" stroke-width="3"/>
-  <rect x="62" y="150" width="160" height="160" rx="18" fill="#fff" stroke="#dfe5e2"/>
-  <rect x="300" y="118" width="120" height="224" rx="18" fill="#EFF6FF" stroke="#b8d9ca"/>
-  <rect x="498" y="150" width="160" height="160" rx="18" fill="#fff" stroke="#dfe5e2"/>
-  <circle cx="142" cy="210" r="28" fill="#2563EB"/>
-  <path d="M104 260h76" stroke="#202423" stroke-width="10" stroke-linecap="round"/>
-  <path d="M331 194h58M331 230h58M331 266h58" stroke="#1D4ED8" stroke-width="12" stroke-linecap="round"/>
-  <path d="M530 210h86M530 252h66" stroke="#202423" stroke-width="12" stroke-linecap="round"/>
-  <text x="142" y="346" text-anchor="middle" fill="#66706c" font-family="system-ui" font-size="24" font-weight="700">Student</text>
-  <text x="360" y="386" text-anchor="middle" fill="#1D4ED8" font-family="system-ui" font-size="24" font-weight="800">Matching API</text>
-  <text x="578" y="346" text-anchor="middle" fill="#66706c" font-family="system-ui" font-size="24" font-weight="700">Company</text>
+  <title id="title">SOUF 3-Tier architecture</title>
+  <desc id="desc">A backend architecture diagram using ALB, EC2 Auto Scaling Group, RDS, Redis, SQS, ECS, and GitHub Actions.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#2563eb"/>
+    </marker>
+    <linearGradient id="panel" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#eff6ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="720" height="460" rx="24" fill="#f8fafc"/>
+  <path d="M46 92c90-62 190-60 300-18 104 40 178 26 278-28" fill="none" stroke="#bfdbfe" stroke-width="26" stroke-linecap="round" opacity="0.48"/>
+  <text x="46" y="54" fill="#0f172a" font-family="system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="26" font-weight="850">SOUF Backend Architecture</text>
+  <text x="48" y="80" fill="#475569" font-family="system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" font-weight="700">ALB + EC2 ASG + RDS with async thumbnail pipeline</text>
+
+  <g font-family="system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <rect x="46" y="176" width="112" height="76" rx="14" fill="#ffffff" stroke="#cbd5e1" filter="url(#shadow)"/>
+    <text x="102" y="207" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="850">Client</text>
+    <text x="102" y="231" text-anchor="middle" fill="#64748b" font-size="12" font-weight="700">Web / Mobile</text>
+
+    <rect x="216" y="166" width="116" height="96" rx="16" fill="#dbeafe" stroke="#93c5fd" filter="url(#shadow)"/>
+    <text x="274" y="207" text-anchor="middle" fill="#1e3a8a" font-size="17" font-weight="900">ALB</text>
+    <text x="274" y="231" text-anchor="middle" fill="#2563eb" font-size="12" font-weight="800">Traffic routing</text>
+
+    <rect x="390" y="112" width="250" height="190" rx="18" fill="url(#panel)" stroke="#bfdbfe" filter="url(#shadow)"/>
+    <text x="515" y="139" text-anchor="middle" fill="#0f172a" font-size="17" font-weight="900">EC2 Auto Scaling Group</text>
+    <text x="515" y="161" text-anchor="middle" fill="#2563eb" font-size="12" font-weight="850">Spring Boot API, max 3 instances</text>
+
+    <rect x="418" y="184" width="58" height="58" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="486" y="184" width="58" height="58" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="554" y="184" width="58" height="58" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="447" y="209" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="850">API</text>
+    <text x="447" y="226" text-anchor="middle" fill="#64748b" font-size="10" font-weight="700">01</text>
+    <text x="515" y="209" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="850">API</text>
+    <text x="515" y="226" text-anchor="middle" fill="#64748b" font-size="10" font-weight="700">02</text>
+    <text x="583" y="209" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="850">API</text>
+    <text x="583" y="226" text-anchor="middle" fill="#64748b" font-size="10" font-weight="700">03</text>
+
+    <rect x="394" y="348" width="116" height="58" rx="14" fill="#ffffff" stroke="#cbd5e1" filter="url(#shadow)"/>
+    <text x="452" y="373" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="900">Redis</text>
+    <text x="452" y="392" text-anchor="middle" fill="#64748b" font-size="11" font-weight="750">Cache / Lock</text>
+
+    <rect x="566" y="348" width="116" height="58" rx="14" fill="#ffffff" stroke="#cbd5e1" filter="url(#shadow)"/>
+    <text x="624" y="373" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="900">RDS</text>
+    <text x="624" y="392" text-anchor="middle" fill="#64748b" font-size="11" font-weight="750">Database</text>
+
+    <rect x="60" y="338" width="124" height="58" rx="14" fill="#ffffff" stroke="#cbd5e1" filter="url(#shadow)"/>
+    <text x="122" y="362" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="900">GitHub Actions</text>
+    <text x="122" y="383" text-anchor="middle" fill="#64748b" font-size="11" font-weight="750">Rolling deploy</text>
+
+    <rect x="220" y="338" width="92" height="58" rx="14" fill="#eff6ff" stroke="#bfdbfe" filter="url(#shadow)"/>
+    <text x="266" y="362" text-anchor="middle" fill="#1e3a8a" font-size="14" font-weight="900">SQS</text>
+    <text x="266" y="383" text-anchor="middle" fill="#2563eb" font-size="11" font-weight="800">Queue</text>
+
+    <rect x="220" y="78" width="92" height="58" rx="14" fill="#ecfeff" stroke="#67e8f9" filter="url(#shadow)"/>
+    <text x="266" y="102" text-anchor="middle" fill="#155e75" font-size="14" font-weight="900">ECS</text>
+    <text x="266" y="123" text-anchor="middle" fill="#0891b2" font-size="11" font-weight="800">Thumbnail</text>
+
+    <path d="M160 214H210" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M334 214H384" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M516 302v40" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M604 302v40" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M184 367h28" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M312 367h80" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M266 338V142" fill="none" stroke="#0891b2" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M312 107h82" fill="none" stroke="#0891b2" stroke-width="3" stroke-dasharray="7 7" marker-end="url(#arrow)"/>
+
+    <text x="360" y="328" text-anchor="middle" fill="#64748b" font-size="11" font-weight="750">cache hits and distributed lock</text>
+    <text x="352" y="423" text-anchor="middle" fill="#64748b" font-size="11" font-weight="750">async thumbnail jobs</text>
+  </g>
 </svg>

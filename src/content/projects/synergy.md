@@ -1,13 +1,20 @@
 ---
-title: "Synergy"
+title: "F'LINK"
 description: "대규모 IT 컨퍼런스 플랫폼 품질 개선 프로젝트"
 summary: "대규모 IT 컨퍼런스 운영을 위한 플랫폼에서 TDD 기반 테스트 코드 작성과 서비스 품질 개선을 진행했습니다."
 date: 2026-05-20
 period: "2024.10 - 2024.12"
 team: "Backend 3명 / Frontend 3명"
-stack: ["Spring Boot", "JUnit5", "Mockito", "JPA", "MySQL"]
+stack: ["Spring Boot", "Redis", "Querydsl", "Jacoco"]
 role: "Backend 테스트 코드 작성 및 서비스 품질 개선"
 status: "Representative"
+card:
+  badge: "코드 품질 개선 프로젝트"
+  device: "phones"
+  image: "/projects/flink-participant.png"
+  imageAlt: "F'LINK 참가자 모바일 화면"
+  secondaryImage: "/projects/flink-manager.png"
+  secondaryImageAlt: "F'LINK 관리자 모바일 화면"
 image: "/projects/synergy-overview.svg"
 imageAlt: "Synergy 컨퍼런스 플랫폼의 테스트와 품질 개선 흐름"
 hoverImage: "/projects/synergy-result.svg"

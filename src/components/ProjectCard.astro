@@ -6,23 +6,56 @@ type Props = {
 };
 
 const { project } = Astro.props;
-const { title, description, role, status, image, imageAlt, hoverImage, hoverImageAlt } =
-  project.data;
+const { title, description, role, card } = project.data;
+const slug = project.id.replace(/\.md$/, "");
+const isPhonePreview = card.device === "phones";
 ---
 
-<a class="project-card" href={`/projects/${project.id}/`}>
+<a class="project-card" href={`/projects/${slug}/`}>
   <div class="project-card-content">
     <div class="project-card-copy">
       <h3>{title}</h3>
       <p class="project-description">{description}</p>
     </div>
     <div class="meta-row">
-      <span class="tag">{status}</span>
+      <span class="tag">{card.badge}</span>
       <span class="tag">{role}</span>
     </div>
   </div>
-  <span class="project-card-media">
-    <img class="project-card-image primary" src={image} alt={imageAlt} loading="lazy" />
-    <img class="project-card-image secondary" src={hoverImage} alt={hoverImageAlt} loading="lazy" />
+  <span class:list={["project-card-media", isPhonePreview ? "phone-media" : "laptop-media"]}>
+    {
+      isPhonePreview ? (
+        <span class="phone-preview" aria-hidden="true">
+          <span class="phone-device phone-device-back">
+            <span class="phone-speaker"></span>
+            <span class="phone-screen">
+              <img class="project-card-image" src={card.secondaryImage ?? card.image} alt="" loading="lazy" />
+            </span>
+          </span>
+          <span class="phone-device phone-device-front">
+            <span class="phone-speaker"></span>
+            <span class="phone-screen">
+              <img class="project-card-image" src={card.image} alt="" loading="lazy" />
+            </span>
+          </span>
+        </span>
+      ) : (
+        <span class="laptop-preview" aria-hidden="true">
+          <span class="laptop-lid">
+            <span class="laptop-camera"></span>
+            <span class="laptop-screen">
+              <img class="project-card-image" src={card.image} alt="" loading="lazy" />
+            </span>
+          </span>
+          <span class="laptop-hinge"></span>
+          <span class="laptop-base"></span>
+          <span class="laptop-shadow"></span>
+        </span>
+      )
+    }
+    <span class="sr-only">
+      {card.imageAlt}
+      {card.secondaryImageAlt ? `, ${card.secondaryImageAlt}` : ""}
+    </span>
   </span>
 </a>

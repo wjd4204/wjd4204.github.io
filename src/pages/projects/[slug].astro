@@ -8,19 +8,21 @@ export async function getStaticPaths() {
   const projects = await getCollection("projects");
 
   return projects.map((project) => ({
-    params: { slug: project.id },
+    params: { slug: project.id.replace(/\.md$/, "") },
     props: { project }
   }));
 }
 
 const { project } = Astro.props;
+const projectSlug = project.id.replace(/\.md$/, "");
 const { title, description, summary, period, team, stack, role, status, repo, demo, slides } =
   project.data;
 
 const stackReasonMap: Record<string, string> = {
   Java: "타입 안정성과 객체지향 설계를 바탕으로 서버 도메인 로직을 안정적으로 구현하기 위해 사용했습니다.",
   "Java 17": "타입 안정성과 장기 지원 버전을 기준으로 서버 도메인 로직을 안정적으로 구현하기 위해 사용했습니다.",
-  "Spring Boot": "API 서버 구성, 의존성 관리, 운영 환경 설정을 빠르게 표준화하기 위해 선택했습니다.",
+  "Spring Boot": "Spring Boot는 웹 애플리케이션 개발에 필요한 설정을 빠르게 구성할 수 있고, Scheduler, EventListener, Cache 추상화 등 서비스 운영에 필요한 기능을 일관된 방식으로 사용할 수 있습니다.\n" +
+    "특히 프로젝트가 단순 CRUD를 넘어 캐싱, 비동기 처리, 배치 중복 실행 방지 같은 운영 이슈를 다루게 되면서 Spring 생태계의 확장성을 활용할 수 있었습니다.",
   JPA: "도메인 객체와 관계형 데이터의 흐름을 일관되게 연결하고, 트랜잭션 중심으로 데이터를 다루기 위해 사용했습니다.",
   "Spring Data JPA": "반복적인 CRUD 구현을 줄이고 도메인 중심의 데이터 접근 흐름을 만들기 위해 사용했습니다.",
   "Spring Cache": "조회 빈도가 높은 데이터의 응답 시간을 줄이고 DB 부하를 낮추기 위해 적용했습니다.",
@@ -40,6 +42,124 @@ const stackReasonMap: Record<string, string> = {
 
 const getStackReason = (item: string) =>
   stackReasonMap[item] ?? "프로젝트 문제를 해결하는 과정에서 필요한 역할과 트레이드오프를 기준으로 선택했습니다.";
+
+type TechDetail = {
+  name: string;
+  reason: string;
+};
+
+const soufTechDetails: TechDetail[] = [
+  {
+    name: "Spring Boot",
+    reason:
+      "저는 Java 기반의 안정적인 생태계와 Spring Security, Spring Data JPA, Cache 추상화 등 운영 서비스에 필요한 기능을 내장하고 있는 Spring Boot를 통해 일관된 방식으로 사용할 수 있었습니다.\n" +
+      "단순 API 서버라면 Express나 NestJS도 가능했지만, 팀의 Java/Spring 숙련도와 인증·트랜잭션·데이터 접근 계층의 안정성을 고려해 Spring Boot를 선택했습니다."
+  },
+  {
+    name: "AWS ALB + EC2 ASG + RDS",
+    reason:
+      "ALB로 요청을 분산하고, EC2 Auto Scaling Group으로 인스턴스를 최대 3대까지 수평 확장하며, RDS로 데이터베이스를 분리해 3-Tier 구조를 구성했습니다.\n" +
+      "단일 EC2 배포는 단순하지만 장애와 트래픽 증가에 취약했습니다. 컨테이너 오케스트레이션까지 도입하기에는 운영 복잡도가 커, 현재 규모에서는 ASG 기반 구성이 적절하다고 판단했습니다."
+  },
+  {
+    name: "Redis",
+    reason:
+      "인기 게시글처럼 갱신 빈도는 낮지만 읽기 요청이 집중되는 데이터에서 DB 조회 비용이 반복적으로 발생하여 Look-aside 캐싱 전략을 적용해 캐시 히트 시 DB 접근 없이 빠르게 응답할 수 있었습니다.\n" +
+      "DB 인덱스 최적화만으로는 반복 조회 부하를 줄이는 데 한계가 있었습니다. 그래서 데이터 정합성보다 조회 성능과 DB 부하 감소가 더 중요한 구간이라고 판단해 Redis 캐싱을 선택했습니다."
+  },
+  {
+    name: "Redisson",
+    reason:
+      "ASG 환경에서 서버 인스턴스가 여러 대로 늘어나면서 스케줄러나 배치 작업이 중복 실행될 위험이 있었습니다. 그래서 Redis 기반 분산락을 적용하여 여러 인스턴스 중 하나의 인스턴스에서만 특정 작업이 실행되도록 보장했습니다.\n" +
+      "synchronized나 JVM Lock은 단일 인스턴스 내부에서만 유효하므로 ASG 환경에 적합하지 않았습니다. DB Lock도 가능하지만, 당시 운영성 측면에서 Redis 기반 락이 더 가볍다고 판단했습니다."
+  },
+  {
+    name: "Google Analytics",
+    reason:
+      "사용자가 어느 흐름에서 이탈하는지 감으로 판단하기 어려웠고, 실제 행동 데이터를 기반으로 개선 지점을 찾아야 했습니다. 경로 탐색 분석을 통해 메인 페이지와 회원가입 흐름에서 사용자가 이탈하는 구간을 확인할 수 있었습니다.\n" +
+      "서버 로그만으로는 사용자의 화면 단위 행동이나 이탈 흐름을 파악하기 어려웠습니다. 사용자 행동 분석에는 Google Analytics가 더 적합하다고 판단했습니다."
+  },
+  {
+    name: "EventListener + AWS SQS + ECS",
+    reason:
+      "이미지 업로드 후 썸네일 추출 작업이 요청 흐름 안에서 처리되면 업로드 응답이 지연되고, 썸네일 처리 실패가 사용자 요청에 영향을 줄 수 있었습니다. Spring EventListener로 도메인 이벤트를 분리하고, SQS로 작업을 큐잉한 뒤 ECS에서 비동기 작업을 처리하도록 구성해 응답 지연과 장애 전파를 줄였습니다.\n" +
+      "동기 처리 방식은 구현은 단순하지만 사용자 응답 시간이 길어집니다. 단순 스케줄러 방식은 실시간 처리성이 떨어질 수 있어, 작업 단위로 안정적으로 처리 가능한 SQS 기반 비동기 구조를 선택했습니다."
+  }
+];
+
+const taveTechDetails: TechDetail[] = [
+  {
+    name: "Spring Boot",
+    reason:
+      "동아리 소개, 활동 기록, 모집 정보처럼 운영 중 반복적으로 변경되는 콘텐츠를 API 단위로 안정적으로 제공하기 위해 사용했습니다.\n" +
+      "단순 정적 페이지로도 구현할 수 있었지만, 운영 데이터와 화면 코드를 분리하고 이후 관리자 기능으로 확장할 가능성을 고려해 Spring Boot 기반 API 구조를 선택했습니다."
+  },
+  {
+    name: "AWS",
+    reason:
+      "운영 중인 공식 웹사이트 특성상 배포 환경이 안정적이어야 했고, 서버 반영 이후에도 외부 사용자가 끊김 없이 접근할 수 있어야 했습니다.\n" +
+      "로컬 서버나 단일 수동 배포 방식은 운영 이력과 장애 대응이 불명확해질 수 있어, 클라우드 환경에서 배포와 운영 흐름을 관리하는 쪽이 더 적합하다고 판단했습니다."
+  },
+  {
+    name: "MS Clarity",
+    reason:
+      "사용자가 모집 정보, 활동 소개, 주요 CTA를 실제로 어떻게 탐색하는지 화면 단위로 확인하기 위해 사용했습니다.\n" +
+      "서버 로그나 단순 방문 수만으로는 사용자가 멈추는 위치와 클릭 흐름을 해석하기 어려워, 히트맵과 세션 리플레이를 제공하는 MS Clarity를 UX 개선 근거로 활용했습니다."
+  },
+  {
+    name: "Redisson",
+    reason:
+      "운영 환경에서 반복 작업이나 상태 변경 로직이 여러 실행 흐름과 겹칠 때 중복 실행 가능성을 줄이기 위해 사용했습니다.\n" +
+      "JVM 내부 락은 단일 인스턴스 범위에 머무르기 때문에, 분산 환경까지 고려하면 Redis 기반으로 락을 다룰 수 있는 Redisson이 더 운영 친화적이라고 판단했습니다."
+  },
+  {
+    name: "Redis",
+    reason:
+      "자주 조회되지만 변경 빈도는 낮은 모집/활동성 데이터의 응답 속도를 높이고 DB 접근 부담을 줄이기 위해 사용했습니다.\n" +
+      "모든 요청을 DB 조회로 처리하는 방식은 단순하지만 반복 조회가 많아질수록 비효율적이므로, 캐싱 계층을 두어 읽기 성능과 운영 안정성을 함께 확보했습니다."
+  }
+];
+
+const flinkTechDetails: TechDetail[] = [
+  {
+    name: "Spring Boot",
+    reason:
+      "컨퍼런스 신청, 세션 조회, 운영 상태 변경처럼 정책 검증이 중요한 서비스 로직을 계층적으로 구성하기 위해 사용했습니다.\n" +
+      "핵심 규칙을 서비스 계층에 모으고 테스트 가능한 단위로 분리할 수 있어, 기능 구현보다 코드 품질과 회귀 검증이 중요한 프로젝트 방향에 잘 맞았습니다."
+  },
+  {
+    name: "Redis",
+    reason:
+      "컨퍼런스성 서비스에서 조회 요청이 몰릴 수 있는 데이터와 상태성 정보를 빠르게 처리하기 위해 사용했습니다.\n" +
+      "DB 조회만으로 처리하면 트래픽 집중 시 응답 지연이 커질 수 있어, 반복 조회 구간의 부하를 낮추고 서비스 응답성을 유지하는 보조 저장소로 선택했습니다."
+  },
+  {
+    name: "Querydsl",
+    reason:
+      "세션, 참가자, 신청 상태처럼 조건 조합이 늘어날 수 있는 조회 로직을 타입 안정성 있게 작성하기 위해 사용했습니다.\n" +
+      "문자열 기반 동적 쿼리는 조건이 많아질수록 유지보수가 어려워지므로, 컴파일 단계에서 오류를 줄이고 복잡한 조회 의도를 코드로 명확히 표현할 수 있는 Querydsl을 선택했습니다."
+  },
+  {
+    name: "Jacoco",
+    reason:
+      "테스트 코드가 실제 핵심 로직을 얼마나 검증하고 있는지 수치로 확인하기 위해 사용했습니다.\n" +
+      "테스트 개수만으로는 품질 개선 정도를 판단하기 어렵기 때문에, 커버리지 리포트를 기준으로 검증이 부족한 영역을 찾고 회귀 테스트의 신뢰도를 높였습니다."
+  }
+];
+
+const projectTechDetailsMap: Record<string, TechDetail[]> = {
+  souf: soufTechDetails,
+  "tave-website": taveTechDetails,
+  synergy: flinkTechDetails
+};
+
+const techDetails: TechDetail[] =
+  projectTechDetailsMap[projectSlug]
+    ? projectTechDetailsMap[projectSlug]
+    : stack.map((item) => ({
+        name: item,
+        reason: getStackReason(item)
+      }));
 ---
 
 <BaseLayout title={title} description={description}>
@@ -92,18 +212,23 @@ const getStackReason = (item: string) =>
         <div class="section-heading section-frame-heading">
           <span class="section-number">01.</span>
           <p class="eyebrow">Backend stack</p>
-          <h2>트러블슈팅 기준 기술 스택</h2>
+          <h2>트러블슈팅 기준<br />기술 스택</h2>
           <p>프로젝트에서 문제를 추적하고 해결할 때 직접 판단 기준으로 삼은 기술을 정리했습니다.</p>
         </div>
-        <div class="project-tech-grid section-frame-body">
+        <div class:list={["project-tech-grid section-frame-body", projectTechDetailsMap[projectSlug] && "project-tech-grid-detailed"]}>
           {
-            stack.map((item) => (
+            techDetails.map((item) => (
               <div class="project-tech-card">
                 <div class="project-tech-card-title">
-                  <SkillLogo name={item} />
-                  <strong>{item}</strong>
+                  <SkillLogo name={item.name} />
+                  <strong>{item.name}</strong>
                 </div>
-                <p>{getStackReason(item)}</p>
+                <dl class="project-tech-detail-list">
+                  <div>
+                    <dt>선택 이유</dt>
+                    <dd>{item.reason}</dd>
+                  </div>
+                </dl>
               </div>
             ))
           }
