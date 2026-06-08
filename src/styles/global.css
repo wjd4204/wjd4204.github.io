@@ -1367,6 +1367,10 @@ p {
   color: var(--muted);
 }
 
+.about-heading p:not(.eyebrow) {
+  white-space: pre-line;
+}
+
 .section-frame-heading {
   justify-content: stretch;
   margin-bottom: 0;
@@ -1422,6 +1426,7 @@ p {
   color: var(--muted);
   font-size: clamp(1rem, 1.4vw, 1.08rem);
   line-height: 1.86;
+  white-space: pre-line;
 }
 
 .profile-list {
@@ -1686,8 +1691,8 @@ p {
 .project-slide {
   min-height: auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-  gap: 28px;
+  grid-template-columns: 1fr;
+  gap: 22px;
   align-items: stretch;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -1707,14 +1712,19 @@ p {
 .slide-media {
   display: grid;
   place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, var(--soft-blue), var(--soft-slate));
+  padding: clamp(12px, 2vw, 18px);
 }
 
 .slide-media img {
   width: 100%;
+  max-height: clamp(220px, 34vw, 380px);
   aspect-ratio: 16 / 10;
-  border: 1px solid var(--line);
   border-radius: 8px;
-  background: linear-gradient(135deg, var(--soft-blue), var(--soft-slate));
   object-fit: contain;
 }
 
@@ -1722,6 +1732,7 @@ p {
   display: grid;
   align-content: start;
   gap: 16px;
+  max-width: 920px;
 }
 
 .project-slide h2 {
@@ -1739,6 +1750,22 @@ p {
   content: "Case ";
 }
 
+.slide-sections {
+  display: grid;
+  gap: 16px;
+}
+
+.slide-section {
+  display: grid;
+  gap: 8px;
+}
+
+.slide-section h3 {
+  color: var(--accent-strong);
+  font-size: 0.95rem;
+  font-weight: 850;
+}
+
 .slide-body {
   display: grid;
   gap: 10px;
@@ -1748,6 +1775,7 @@ p {
   color: var(--muted);
   font-size: 1.04rem;
   line-height: 1.78;
+  white-space: pre-line;
 }
 
 .slide-points {
@@ -1765,6 +1793,7 @@ p {
   background: var(--accent-soft);
   border-radius: 0 6px 6px 0;
   padding: 9px 12px;
+  white-space: pre-line;
 }
 
 .project-tech-section {

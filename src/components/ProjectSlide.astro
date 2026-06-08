@@ -7,9 +7,56 @@ type Props = {
   imageAlt: string;
   body: string[];
   points?: string[];
+  problem?: string[];
+  cause?: string[];
+  solution?: string[];
+  result?: string[];
+  lesson?: string[];
 };
 
-const { index, keyLabel, title, image, imageAlt, body, points = [] } = Astro.props;
+const {
+  index,
+  keyLabel,
+  title,
+  image,
+  imageAlt,
+  body,
+  points = [],
+  problem,
+  cause,
+  solution,
+  result,
+  lesson
+} = Astro.props;
+
+const hasStructuredSections = Boolean(problem || cause || solution || result || lesson);
+const slideSections = [
+  {
+    label: "문제 상황",
+    items: problem ?? (hasStructuredSections ? [] : body.slice(0, 1)),
+    tone: "text"
+  },
+  {
+    label: "원인 분석",
+    items: cause ?? (hasStructuredSections ? [] : body.slice(1, 2)),
+    tone: "text"
+  },
+  {
+    label: "해결 과정",
+    items: solution ?? (hasStructuredSections ? [] : body.slice(2)),
+    tone: "text"
+  },
+  {
+    label: "성과",
+    items: result ?? (hasStructuredSections ? [] : points),
+    tone: "points"
+  },
+  {
+    label: "배운 점",
+    items: lesson ?? [],
+    tone: "points"
+  }
+].filter((section) => section.items.length > 0);
 ---
 
 <section class="project-slide" aria-labelledby={`slide-${index}`}>
@@ -19,15 +66,25 @@ const { index, keyLabel, title, image, imageAlt, body, points = [] } = Astro.pro
   <div class="slide-copy">
     <p class="slide-index">{String(index).padStart(2, "0")} / {keyLabel}</p>
     <h2 id={`slide-${index}`}>{title}</h2>
-    <div class="slide-body">
-      {body.map((item) => <p>{item}</p>)}
+    <div class="slide-sections">
+      {
+        slideSections.map((section) => (
+          <section class:list={["slide-section", section.tone === "points" && "slide-section-points"]}>
+            <h3>{section.label}</h3>
+            {
+              section.tone === "points" ? (
+                <ul class="slide-points">
+                  {section.items.map((item) => <li>{item}</li>)}
+                </ul>
+              ) : (
+                <div class="slide-body">
+                  {section.items.map((item) => <p>{item}</p>)}
+                </div>
+              )
+            }
+          </section>
+        ))
+      }
     </div>
-    {
-      points.length > 0 && (
-        <ul class="slide-points">
-          {points.map((point) => <li>{point}</li>)}
-        </ul>
-      )
-    }
   </div>
 </section>

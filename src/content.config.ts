@@ -28,8 +28,13 @@ const projects = defineCollection({
         title: z.string(),
         image: z.string(),
         imageAlt: z.string(),
-        body: z.array(z.string()),
-        points: z.array(z.string()).default([])
+        body: z.array(z.string()).default([]),
+        points: z.array(z.string()).default([]),
+        problem: z.array(z.string()).optional(),
+        cause: z.array(z.string()).optional(),
+        solution: z.array(z.string()).optional(),
+        result: z.array(z.string()).optional(),
+        lesson: z.array(z.string()).optional()
       })
     ),
     repo: z.string().url().optional(),
