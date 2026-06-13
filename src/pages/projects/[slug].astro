@@ -124,8 +124,8 @@ const flinkTechDetails: TechDetail[] = [
   {
     name: "Spring Boot",
     reason:
-      "컨퍼런스 신청, 세션 조회, 운영 상태 변경처럼 정책 검증이 중요한 서비스 로직을 계층적으로 구성하기 위해 사용했습니다.\n" +
-      "핵심 규칙을 서비스 계층에 모으고 테스트 가능한 단위로 분리할 수 있어, 기능 구현보다 코드 품질과 회귀 검증이 중요한 프로젝트 방향에 잘 맞았습니다."
+      "컨퍼런스 신청, 부스 생성, 세션 조회, 운영 상태 변경처럼 정책 검증이 중요한 서비스 로직을 계층적으로 구성하기 위해 사용했습니다.\n" +
+      "핵심 규칙을 서비스 계층에 모으고 테스트 가능한 단위로 분리할 수 있어, 기능 구현보다 코드 품질과 회귀 검증에 초점을 둔 프로젝트의 목적과 잘 맞았습니다."
   },
   {
     name: "Redis",
@@ -246,6 +246,8 @@ const techDetails: TechDetail[] =
                 title={slide.title}
                 image={slide.image}
                 imageAlt={slide.imageAlt}
+                imageLink={slide.imageLink}
+                imageLinkLabel={slide.imageLinkLabel}
                 body={slide.body}
                 points={slide.points}
                 problem={slide.problem}

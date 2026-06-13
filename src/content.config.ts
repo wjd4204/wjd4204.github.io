@@ -28,6 +28,8 @@ const projects = defineCollection({
         title: z.string(),
         image: z.string(),
         imageAlt: z.string(),
+        imageLink: z.string().url().optional(),
+        imageLinkLabel: z.string().optional(),
         body: z.array(z.string()).default([]),
         points: z.array(z.string()).default([]),
         problem: z.array(z.string()).optional(),
