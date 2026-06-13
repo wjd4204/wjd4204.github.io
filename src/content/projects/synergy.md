@@ -1,7 +1,11 @@
 ---
 title: "F'LINK"
-description: "대규모 IT 컨퍼런스 플랫폼 품질 개선 프로젝트"
-summary: "대규모 IT 컨퍼런스 운영을 위한 플랫폼에서 TDD 기반 테스트 코드 작성과 서비스 품질 개선을 진행했습니다."
+description: "IT 컨퍼런스 플랫폼 품질 개선 프로젝트"
+summary: "컨퍼런스 신청과 운영 로직을 테스트로 고정해, 배포 전 불안한 부분을 줄인 프로젝트입니다."
+quickSummary:
+  - "신청, 정원, 운영 상태처럼 한 번 틀리면 바로 운영 이슈가 되는 로직을 먼저 골랐습니다."
+  - "실패 케이스를 테스트로 작성해 팀원이 같은 기준으로 기능을 수정할 수 있게 했습니다."
+  - "결과적으로 리팩터링과 기능 추가 전에 빠르게 회귀 확인을 할 수 있는 기반을 만들었습니다."
 date: 2026-05-20
 period: "2024.10 - 2024.12"
 team: "Backend 3명 / Frontend 3명"
@@ -33,6 +37,10 @@ slides:
       - "인원: Backend 3명 / Frontend 3명"
       - "역할: 테스트 코드 작성, 서비스 로직 검증"
       - "기술: Spring Boot, JUnit5, Mockito, JPA, MySQL"
+    troubleshootingSummary:
+      problem: "신청과 운영 상태 변경은 장애가 나면 회복 시간이 짧은 영역이었습니다."
+      judgment: "핵심 정책을 서비스 계층 테스트로 먼저 잡는 쪽이 가장 현실적이라고 봤습니다."
+      result: "팀이 수정 전에 확인할 수 있는 테스트 기준을 확보했습니다."
   - key: "Problem"
     title: "이벤트성 서비스는 작은 오류도 운영 리스크가 됩니다."
     image: "/projects/synergy-problem.svg"
@@ -44,6 +52,10 @@ slides:
       - "일시적인 트래픽 집중 가능성"
       - "신청 상태와 정원 관리 오류 위험"
       - "운영 일정상 빠른 회귀 검증 필요"
+    troubleshootingSummary:
+      problem: "정원 초과나 중복 신청 같은 작은 오류도 행사 운영 리스크로 이어질 수 있었습니다."
+      judgment: "정상 흐름보다 실패 흐름을 먼저 정리해야 배포 전 검증이 의미 있다고 봤습니다."
+      result: "테스트 시나리오의 우선순위를 실패 케이스 중심으로 잡았습니다."
   - key: "Tech Choice"
     title: "JUnit5와 Mockito로 서비스 로직을 먼저 검증했습니다."
     image: "/projects/synergy-tech.svg"
@@ -55,6 +67,10 @@ slides:
       - "JUnit5: 정책별 테스트 케이스 작성"
       - "Mockito: Repository 의존성 대체"
       - "TDD: 실패 케이스를 먼저 정의하고 구현"
+    troubleshootingSummary:
+      problem: "외부 의존성이 섞이면 서비스 정책만 빠르게 확인하기 어려웠습니다."
+      judgment: "JUnit5와 Mockito로 의존성을 줄이고 서비스 로직 검증에 집중했습니다."
+      result: "조건별 동작을 짧은 피드백 주기로 확인할 수 있었습니다."
   - key: "Solution"
     title: "실패 케이스를 기준으로 테스트 시나리오를 작성했습니다."
     image: "/projects/synergy-solution.svg"
@@ -66,6 +82,10 @@ slides:
       - "중복 신청 방지 테스트"
       - "정원 초과 예외 테스트"
       - "운영 상태 변경 권한 검증"
+    troubleshootingSummary:
+      problem: "정상 케이스만 있으면 실제 운영에서 깨질 지점이 남아 있었습니다."
+      judgment: "중복 신청, 정원 초과, 권한 오류를 먼저 실패 케이스로 고정했습니다."
+      result: "서비스 메서드의 예외 기준이 코드와 테스트에 함께 남았습니다."
   - key: "Result"
     title: "배포 전 회귀 확인이 가능한 서비스가 되었습니다."
     image: "/projects/synergy-result.svg"
@@ -77,4 +97,8 @@ slides:
       - "핵심 서비스 로직 테스트 기반 확보"
       - "실패 케이스에 대한 팀 내 기준 공유"
       - "리팩터링과 기능 추가의 안정성 향상"
+    troubleshootingSummary:
+      problem: "기능을 고친 뒤 기존 정책이 그대로 지켜지는지 확인할 기준이 부족했습니다."
+      judgment: "테스트를 회귀 검증 도구이자 팀 문서로 쓰는 방향을 선택했습니다."
+      result: "수정 후 영향 범위를 더 빠르게 확인할 수 있게 되었습니다."
 ---

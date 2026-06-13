@@ -1,7 +1,11 @@
 ---
 title: "TAVE Website"
 description: "IT 연합 동아리 TAVE 공식 웹사이트"
-summary: "동아리 소개, 활동 기록, 모집 정보를 안정적으로 제공하는 TAVE 공식 웹사이트입니다."
+summary: "모집 때마다 바뀌는 동아리 정보를 화면 코드와 분리해, 더 빠르게 운영할 수 있게 만든 공식 웹사이트입니다."
+quickSummary:
+  - "모집 기간, 활동 기록, 소개 문구처럼 자주 바뀌는 정보를 API 기준으로 나눴습니다."
+  - "GitHub Actions와 Nginx 배포 흐름을 정리해 운영 중 수정 부담을 낮췄습니다."
+  - "이후 관리자 기능이나 CMS를 붙일 수 있도록 데이터와 화면의 결합을 줄였습니다."
 date: 2026-05-28
 period: "2024.07 - 2024.09"
 team: "Backend 1명 / Frontend 2명 / Design 1명"
@@ -31,6 +35,10 @@ slides:
       - "인원: Backend 1명 / Frontend 2명 / Design 1명"
       - "역할: 콘텐츠 API, 배포 환경 구성"
       - "기술: Spring Boot, JPA, MySQL, GitHub Actions, Nginx"
+    troubleshootingSummary:
+      problem: "공식 웹사이트는 모집 시기에 정보 변경이 몰리는 구조였습니다."
+      judgment: "운영 데이터와 화면 코드를 분리해야 수정 속도와 안정성을 같이 챙길 수 있다고 봤습니다."
+      result: "콘텐츠 API와 배포 흐름을 기준으로 운영 기반을 잡았습니다."
   - key: "Problem"
     title: "모집 시기마다 바뀌는 정보를 빠르게 반영해야 했습니다."
     image: "/projects/tave-problem.svg"
@@ -42,6 +50,10 @@ slides:
       - "모집 기간별 노출 정보 변경"
       - "활동 기록과 소개 콘텐츠의 반복 갱신"
       - "서비스 중단 없이 빠른 수정 필요"
+    troubleshootingSummary:
+      problem: "정적 문구에 의존하면 정보가 바뀔 때마다 배포가 필요했습니다."
+      judgment: "변경 가능성이 높은 데이터를 별도로 관리하는 구조가 필요했습니다."
+      result: "모집, 활동, 소개 영역을 API 단위로 나누기로 했습니다."
   - key: "Tech Choice"
     title: "Spring Boot와 배포 자동화로 운영 부담을 낮췄습니다."
     image: "/projects/tave-tech.svg"
@@ -53,6 +65,10 @@ slides:
       - "Spring Boot: 콘텐츠 API 구성"
       - "MySQL: 모집 정보와 활동 데이터 관리"
       - "GitHub Actions: 반복 배포 과정 자동화"
+    troubleshootingSummary:
+      problem: "운영 중 반복 수정이 생기면 수동 배포와 데이터 관리가 부담이 됐습니다."
+      judgment: "Spring Boot API와 배포 자동화로 변경 흐름을 단순하게 가져갔습니다."
+      result: "콘텐츠 수정과 배포 확인 절차가 이전보다 명확해졌습니다."
   - key: "Solution"
     title: "콘텐츠 단위 API와 배포 흐름을 정리했습니다."
     image: "/projects/tave-solution.svg"
@@ -64,6 +80,10 @@ slides:
       - "화면 섹션 기준 API 분리"
       - "운영 데이터와 화면 코드의 결합도 감소"
       - "배포 후 서비스 확인 절차 명확화"
+    troubleshootingSummary:
+      problem: "프론트엔드가 필요한 데이터를 한 흐름에서 안정적으로 받아야 했습니다."
+      judgment: "화면 섹션 기준으로 API를 나누면 협업과 변경 대응이 쉬워진다고 봤습니다."
+      result: "각 섹션의 데이터 책임이 분명해졌고 배포 확인도 단순해졌습니다."
   - key: "Result"
     title: "운영자가 다루기 쉬운 공식 웹사이트 기반을 만들었습니다."
     image: "/projects/tave-result.svg"
@@ -75,4 +95,8 @@ slides:
       - "콘텐츠 API 기준 정리"
       - "반복 배포 과정 단순화"
       - "관리자 기능으로 확장 가능한 기반"
+    troubleshootingSummary:
+      problem: "운영자가 매번 개발자에게 의존하는 구조로 남을 수 있었습니다."
+      judgment: "처음부터 콘텐츠 관리 확장성을 염두에 둔 구조가 낫다고 봤습니다."
+      result: "관리자 기능이나 CMS로 이어갈 수 있는 기반을 만들었습니다."
 ---

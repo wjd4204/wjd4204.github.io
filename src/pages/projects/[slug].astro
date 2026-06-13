@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const projectSlug = project.id.replace(/\.md$/, "");
-const { title, description, summary, period, team, stack, role, status, repo, demo, slides } =
+const { title, description, summary, quickSummary, period, team, stack, role, status, repo, demo, slides } =
   project.data;
 
 const stackReasonMap: Record<string, string> = {
@@ -172,6 +172,13 @@ const techDetails: TechDetail[] =
         <p class="eyebrow">{status}</p>
         <h1>{title}</h1>
         <p class="lead">{summary}</p>
+        {
+          quickSummary.length > 0 && (
+            <ul class="project-brief-points" aria-label={`${title} 보충 소개`}>
+              {quickSummary.map((item) => <li>{item}</li>)}
+            </ul>
+          )
+        }
       </div>
       <aside class="hero-panel">
         <ul class="status-list">
@@ -259,6 +266,7 @@ const techDetails: TechDetail[] =
                 solution={slide.solution}
                 result={slide.result}
                 lesson={slide.lesson}
+                troubleshootingSummary={slide.troubleshootingSummary}
               />
             ))
           }

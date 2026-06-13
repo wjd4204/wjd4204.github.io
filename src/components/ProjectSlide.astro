@@ -12,6 +12,11 @@ type Props = {
   solution?: string[];
   result?: string[];
   lesson?: string[];
+  troubleshootingSummary?: {
+    problem: string;
+    judgment: string;
+    result: string;
+  };
 };
 
 const {
@@ -26,7 +31,8 @@ const {
   cause,
   solution,
   result,
-  lesson
+  lesson,
+  troubleshootingSummary
 } = Astro.props;
 
 const hasStructuredSections = Boolean(problem || cause || solution || result || lesson);
@@ -66,25 +72,46 @@ const slideSections = [
   <div class="slide-copy">
     <p class="slide-index">{String(index).padStart(2, "0")} / {keyLabel}</p>
     <h2 id={`slide-${index}`}>{title}</h2>
-    <div class="slide-sections">
-      {
-        slideSections.map((section) => (
-          <section class:list={["slide-section", section.tone === "points" && "slide-section-points"]}>
-            <h3>{section.label}</h3>
-            {
-              section.tone === "points" ? (
-                <ul class="slide-points">
-                  {section.items.map((item) => <li>{item}</li>)}
-                </ul>
-              ) : (
-                <div class="slide-body">
-                  {section.items.map((item) => <p>{item}</p>)}
-                </div>
-              )
-            }
-          </section>
-        ))
-      }
-    </div>
+    {
+      troubleshootingSummary && (
+        <dl class="troubleshooting-summary">
+          <div>
+            <dt>문제</dt>
+            <dd>{troubleshootingSummary.problem}</dd>
+          </div>
+          <div>
+            <dt>판단</dt>
+            <dd>{troubleshootingSummary.judgment}</dd>
+          </div>
+          <div>
+            <dt>결과</dt>
+            <dd>{troubleshootingSummary.result}</dd>
+          </div>
+        </dl>
+      )
+    }
+    <details class="slide-detail">
+      <summary>상세 보기</summary>
+      <div class="slide-sections">
+        {
+          slideSections.map((section) => (
+            <section class:list={["slide-section", section.tone === "points" && "slide-section-points"]}>
+              <h3>{section.label}</h3>
+              {
+                section.tone === "points" ? (
+                  <ul class="slide-points">
+                    {section.items.map((item) => <li>{item}</li>)}
+                  </ul>
+                ) : (
+                  <div class="slide-body">
+                    {section.items.map((item) => <p>{item}</p>)}
+                  </div>
+                )
+              }
+            </section>
+          ))
+        }
+      </div>
+    </details>
   </div>
 </section>

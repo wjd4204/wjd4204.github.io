@@ -32,27 +32,22 @@ const aboutIntroductions = [
 const stacks = [
   {
     group: "Language",
-    summary: "주력 언어와 런타임 이해를 바탕으로 안정적인 서버 코드를 작성합니다.",
     items: ["Java 17"]
   },
   {
     group: "Framework / Library",
-    summary: "Spring 기반 API, 데이터 접근, 캐싱, 동적 쿼리 설계를 프로젝트에 맞게 선택합니다.",
     items: ["Spring Boot", "Spring Data JPA", "Spring Cache", "Querydsl"]
   },
   {
     group: "Database",
-    summary: "관계형 데이터 모델링과 캐시/문서형 저장소를 문제 성격에 맞게 조합합니다.",
     items: ["MySQL", "PostgreSQL", "MongoDB", "Redis"]
   },
   {
     group: "Infra / Cloud",
-    summary: "배포와 운영 환경을 고려해 컨테이너와 클라우드 기반 실행 환경을 다룹니다.",
     items: ["Docker", "AWS"]
   },
   {
     group: "ETC",
-    summary: "협업과 의사결정 기록을 남기며, 문제 해결 과정을 팀과 공유합니다.",
     items: ["Notion", "Jira", "Confluence", "Slack"]
   }
 ];
@@ -166,9 +161,8 @@ const stacks = [
         {
           stacks.map((stackGroup) => (
             <section class="skill-group-card">
-              <div class="skill-group-copy">
+              <div class="skill-group-summary">
                 <h3>{stackGroup.group}</h3>
-                <p>{stackGroup.summary}</p>
               </div>
               <div class="skill-chip-list">
                 {stackGroup.items.map((item) => (

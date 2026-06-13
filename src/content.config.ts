@@ -4,6 +4,7 @@ const projects = defineCollection({
     title: z.string(),
     description: z.string(),
     summary: z.string(),
+    quickSummary: z.array(z.string()).default([]),
     date: z.coerce.date(),
     period: z.string(),
     team: z.string(),
@@ -34,7 +35,14 @@ const projects = defineCollection({
         cause: z.array(z.string()).optional(),
         solution: z.array(z.string()).optional(),
         result: z.array(z.string()).optional(),
-        lesson: z.array(z.string()).optional()
+        lesson: z.array(z.string()).optional(),
+        troubleshootingSummary: z
+          .object({
+            problem: z.string(),
+            judgment: z.string(),
+            result: z.string()
+          })
+          .optional()
       })
     ),
     repo: z.string().url().optional(),
