@@ -6,7 +6,7 @@ date: 2026-06-02
 period: "2025.01 - 2026.01"
 team: "FE 2인, BE 2인, Marketing 1인, AI 1인"
 stack: [ "Spring Boot", "AWS", "Redis", "EventListener + SQS + ECS", "Google Analytics"]
-role: "PM 및 백엔드 설계 및 기능 구현 담당"
+role: "PM, 백엔드 설계 및 기능 구현 담당"
 status: "Platform"
 card:
   badge: "창업형 서비스 프로젝트"
