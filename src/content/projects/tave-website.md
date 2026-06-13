@@ -2,10 +2,6 @@
 title: "TAVE Website"
 description: "IT 연합 동아리 TAVE 공식 웹사이트"
 summary: "모집 때마다 바뀌는 동아리 정보를 화면 코드와 분리해, 더 빠르게 운영할 수 있게 만든 공식 웹사이트입니다."
-quickSummary:
-  - "모집 기간, 활동 기록, 소개 문구처럼 자주 바뀌는 정보를 API 기준으로 나눴습니다."
-  - "GitHub Actions와 Nginx 배포 흐름을 정리해 운영 중 수정 부담을 낮췄습니다."
-  - "이후 관리자 기능이나 CMS를 붙일 수 있도록 데이터와 화면의 결합을 줄였습니다."
 date: 2026-05-28
 period: "2024.07 - 2024.09"
 team: "Backend 1명 / Frontend 2명 / Design 1명"

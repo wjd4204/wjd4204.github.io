@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const projectSlug = project.id.replace(/\.md$/, "");
-const { title, description, summary, quickSummary, period, team, stack, role, status, repo, demo, slides } =
+const { title, description, summary, period, team, stack, role, status, repo, demo, slides } =
   project.data;
 
 const stackReasonMap: Record<string, string> = {
@@ -134,12 +134,6 @@ const flinkTechDetails: TechDetail[] = [
       "DB 조회만으로 처리하면 트래픽 집중 시 응답 지연이 커질 수 있어, 반복 조회 구간의 부하를 낮추고 서비스 응답성을 유지하는 보조 저장소로 선택했습니다."
   },
   {
-    name: "Querydsl",
-    reason:
-      "세션, 참가자, 신청 상태처럼 조건 조합이 늘어날 수 있는 조회 로직을 타입 안정성 있게 작성하기 위해 사용했습니다.\n" +
-      "문자열 기반 동적 쿼리는 조건이 많아질수록 유지보수가 어려워지므로, 컴파일 단계에서 오류를 줄이고 복잡한 조회 의도를 코드로 명확히 표현할 수 있는 Querydsl을 선택했습니다."
-  },
-  {
     name: "Jacoco",
     reason:
       "테스트 코드가 실제 핵심 로직을 얼마나 검증하고 있는지 수치로 확인하기 위해 사용했습니다.\n" +
@@ -172,13 +166,6 @@ const techDetails: TechDetail[] =
         <p class="eyebrow">{status}</p>
         <h1>{title}</h1>
         <p class="lead">{summary}</p>
-        {
-          quickSummary.length > 0 && (
-            <ul class="project-brief-points" aria-label={`${title} 보충 소개`}>
-              {quickSummary.map((item) => <li>{item}</li>)}
-            </ul>
-          )
-        }
       </div>
       <aside class="hero-panel">
         <ul class="status-list">

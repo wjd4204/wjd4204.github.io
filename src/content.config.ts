@@ -4,7 +4,6 @@ const projects = defineCollection({
     title: z.string(),
     description: z.string(),
     summary: z.string(),
-    quickSummary: z.array(z.string()).default([]),
     date: z.coerce.date(),
     period: z.string(),
     team: z.string(),
