@@ -21,8 +21,8 @@ featured: true
 slides:
   - key: "Mail Batch"
     title: "대량 메일 발송 자동화 시스템 구현"
-    image: "/projects/tave-overview.svg"
-    imageAlt: "TAVE 지원자 메일 발송 배치 처리 구조"
+    image: "/projects/tave-mail-success.png"
+    imageAlt: "Spring Batch와 AWS SES 기반 메일 발송 처리 구조"
     problem:
       - "기존에는 서류 및 면접 합격자 안내 메일을 약 300명 이상의 지원자에게 수동으로 발송하고 있었습니다.
       반복 작업에 따른 인력 소모가 매우 컸고, 발송 누락이나 지연 등 운영상 실수가 발생할 위험이 있었습니다."
@@ -56,8 +56,8 @@ slides:
       result: "2,000건 테스트 검증 후, 실제 지원 기간 중 182명을 대상으로 발송 성공률 100%를 달성했습니다."
   - key: "UX Performance"
     title: "MS Clarity 병목 분석과 WebP 전환으로 응답 속도 94.8%% 개선"
-    image: "/projects/tave-result.svg"
-    imageAlt: "Microsoft Clarity 기반 사용자 행동 분석과 이미지 최적화 결과"
+    image: "/projects/tave-ms-clarity-webp.png"
+    imageAlt: "MS Clarity 분석 기반 WebP 이미지 최적화 결과"
     problem:
       - "공식 홈페이지 개발 중 MS Clarity 분석을 통해 페이지 렌더링이 지연되는 병목 구간을 확인했습니다.
       한 페이지 내에 고해상도 이미지를 불러오는 과정에서 이미지 파일 크기가 병목의 원인이었습니다."
