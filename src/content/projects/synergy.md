@@ -7,7 +7,7 @@ period: "2024.12 - 2025.04"
 team: "FE 2인, BE 4인, PM 1인, UI/UX 디자이너 2인"
 stack: ["Spring Boot", "Redis", "Jacoco"]
 role: "Backend 테스트 코드 작성 및 서비스 품질 개선"
-status: "Representative"
+status: "Quality Improvement"
 card:
   badge: "코드 품질 개선 프로젝트"
   device: "phones"
