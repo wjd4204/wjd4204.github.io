@@ -55,7 +55,7 @@ slides:
       judgment: "Spring Batch 파티셔닝과 AWS SES를 도입하여 대량 메일 발송 자동화 시스템을 구축했습니다."
       result: "2,000건 테스트 검증 후, 실제 지원 기간 중 182명을 대상으로 발송 성공률 100%를 달성했습니다."
   - key: "UX Performance"
-    title: "MS Clarity 병목 분석과 WebP 전환으로 응답 속도 94.8%% 개선"
+    title: "MS Clarity 병목 분석과 WebP 전환으로 응답 속도 94.8% 개선"
     image: "/projects/tave-ms-clarity-webp.png"
     imageAlt: "MS Clarity 분석 기반 WebP 이미지 최적화 결과"
     problem:
