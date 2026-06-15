@@ -1428,30 +1428,58 @@ p {
 
 .profile-list {
   display: grid;
-  gap: 13px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2.6vw, 26px) clamp(20px, 4vw, 44px);
   margin: 0;
 }
 
 .profile-list div {
   display: grid;
-  grid-template-columns: 118px minmax(0, 1fr);
-  gap: 18px;
-  align-items: baseline;
-  padding-block: 3px;
+  gap: 8px;
+  align-content: start;
+  min-width: 0;
+  padding-block: 2px;
 }
 
 .profile-list dt {
-  color: color-mix(in srgb, var(--muted) 74%, var(--bg));
-  font-size: 0.98rem;
-  font-weight: 750;
-  line-height: 1.55;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: color-mix(in srgb, var(--text) 82%, var(--muted));
+  font-size: 1.3rem;
+  font-weight: 850;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+
+.profile-icon {
+  display: inline-grid;
+  width: 31px;
+  height: 31px;
+  flex: 0 0 31px;
+  place-items: center;
+  color: color-mix(in srgb, var(--accent) 72%, var(--text));
+}
+
+.profile-icon svg {
+  width: 29px;
+  height: 29px;
+  overflow: visible;
+}
+
+.profile-icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
 }
 
 .profile-list dd {
   min-width: 0;
   margin: 0;
   color: var(--text);
-  font-size: clamp(1.02rem, 1.45vw, 1.1rem);
+  font-size: clamp(1rem, 1.35vw, 1.08rem);
   line-height: 1.65;
   overflow-wrap: anywhere;
 }
@@ -1465,11 +1493,11 @@ p {
 .skill-group-card {
   display: grid;
   grid-template-columns: minmax(150px, 0.24fr) minmax(0, 1fr);
-  column-gap: clamp(14px, 2vw, 22px);
+  column-gap: clamp(17px, 2.4vw, 26px);
   align-items: start;
   border-bottom: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
   background: transparent;
-  padding: 0;
+  padding-block: clamp(2px, 0.45vw, 5px);
 }
 
 .skill-group-card:first-child {
@@ -1482,7 +1510,7 @@ p {
 
 .skill-group-summary {
   display: block;
-  padding: 1px 0;
+  padding: 2px 0;
 }
 
 .skill-group-summary h3 {
@@ -1497,7 +1525,7 @@ p {
   grid-template-columns: 1fr;
   gap: 12px;
   min-width: 0;
-  margin: 1px 0;
+  margin: 2px 0;
   border-left: 1px solid color-mix(in srgb, var(--accent) 34%, var(--line));
   padding-left: clamp(14px, 2vw, 20px);
 }
@@ -2102,6 +2130,22 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .skill-group-card {
+    gap: 6px;
+    padding-block: 8px;
+  }
+
+  .skill-chip-list {
+    grid-column: 1;
+    margin: 0;
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .skill-group-summary {
+    padding: 0;
+  }
+
   .project-card {
     gap: 18px;
   }
@@ -2126,9 +2170,12 @@ p {
     gap: 4px;
   }
 
-  .profile-list div {
+  .profile-list {
     grid-template-columns: 1fr;
-    gap: 4px;
+  }
+
+  .profile-list div {
+    gap: 6px;
   }
 
   .section-heading,
