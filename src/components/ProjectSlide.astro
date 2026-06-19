@@ -39,6 +39,22 @@ const {
   troubleshootingSummary
 } = Astro.props;
 
+const escapeHtml = (value: string) =>
+  value.replace(/[&<>"']/g, (character) => {
+    const entities: Record<string, string> = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    };
+
+    return entities[character];
+  });
+
+const renderBoldText = (value: string) =>
+  escapeHtml(value).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
 const hasStructuredSections = Boolean(problem || cause || solution || result || lesson);
 const slideSections = [
   {
@@ -88,15 +104,15 @@ const slideSections = [
         <dl class="troubleshooting-summary">
           <div>
             <dt>문제</dt>
-            <dd>{troubleshootingSummary.problem}</dd>
+            <dd set:html={renderBoldText(troubleshootingSummary.problem)} />
           </div>
           <div>
             <dt>판단</dt>
-            <dd>{troubleshootingSummary.judgment}</dd>
+            <dd set:html={renderBoldText(troubleshootingSummary.judgment)} />
           </div>
           <div>
             <dt>결과</dt>
-            <dd>{troubleshootingSummary.result}</dd>
+            <dd set:html={renderBoldText(troubleshootingSummary.result)} />
           </div>
         </dl>
       )
@@ -111,11 +127,11 @@ const slideSections = [
               {
                 section.tone === "points" ? (
                   <ul class="slide-points">
-                    {section.items.map((item) => <li>{item}</li>)}
+                    {section.items.map((item) => <li set:html={renderBoldText(item)} />)}
                   </ul>
                 ) : (
                   <div class="slide-body">
-                    {section.items.map((item) => <p>{item}</p>)}
+                    {section.items.map((item) => <p set:html={renderBoldText(item)} />)}
                   </div>
                 )
               }
