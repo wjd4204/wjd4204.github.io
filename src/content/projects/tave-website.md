@@ -1,7 +1,7 @@
 ---
 title: "TAVE Website"
 description: "IT 연합 동아리 TAVE 공식 웹사이트"
-summary: "모집 때마다 바뀌는 동아리 정보를 화면 코드와 분리해, 더 빠르게 운영할 수 있게 만든 공식 웹사이트입니다."
+summary: "IT 연합 동아리 TAVE를 효율적으로 운영할 수 있게 만든 공식 웹사이트입니다."
 date: 2026-05-28
 period: "2024.10 - 2025.08"
 team: "PM 1인, FE 4인, BE 4인, DA 3인"
