@@ -9,6 +9,11 @@ const { project } = Astro.props;
 const { title, description, role, card } = project.data;
 const slug = project.id.replace(/\.md$/, "");
 const isPhonePreview = card.device === "phones";
+const previewStyle = [
+  card.imageFit && `--card-image-fit: ${card.imageFit}`,
+  card.imagePosition && `--card-image-position: ${card.imagePosition}`,
+  card.screenRatio && `--card-screen-ratio: ${card.screenRatio}`
+].filter(Boolean).join("; ");
 ---
 
 <a class="project-card" href={`/projects/${slug}/`}>
@@ -22,7 +27,7 @@ const isPhonePreview = card.device === "phones";
       <span class="tag">{role}</span>
     </div>
   </div>
-  <span class:list={["project-card-media", isPhonePreview ? "phone-media" : "laptop-media"]}>
+  <span class:list={["project-card-media", isPhonePreview ? "phone-media" : "laptop-media"]} style={previewStyle}>
     {
       isPhonePreview ? (
         <span class="phone-preview" aria-hidden="true">

@@ -14,11 +14,6 @@ type Props = {
   solution?: string[];
   result?: string[];
   lesson?: string[];
-  troubleshootingSummary?: {
-    problem: string;
-    judgment: string;
-    result: string;
-  };
 };
 
 const {
@@ -35,8 +30,7 @@ const {
   cause,
   solution,
   result,
-  lesson,
-  troubleshootingSummary
+  lesson
 } = Astro.props;
 
 const escapeHtml = (value: string) =>
@@ -54,6 +48,109 @@ const escapeHtml = (value: string) =>
 
 const renderBoldText = (value: string) =>
   escapeHtml(value).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
+const renderInlineText = (value: string) => renderBoldText(value);
+const unorderedMarkerPattern = /^(\s*)[-*]\s+(.+)$/;
+const orderedMarkerPattern = /^(\s*)\d+[.)]\s+(.+)$/;
+
+type RenderBlock = string | ListBlock;
+
+type ListBlock = {
+  type: "ul" | "ol";
+  indent: number;
+  items: ListItem[];
+};
+
+type ListItem = {
+  content: string;
+  children: ListBlock[];
+};
+
+const renderListBlock = (list: ListBlock): string => {
+  const renderedItems = list.items
+    .map((item) => {
+      const children = item.children.map(renderListBlock).join("");
+      return "<li>" + renderInlineText(item.content) + children + "</li>";
+    })
+    .join("");
+
+  return "<" + list.type + ">" + renderedItems + "</" + list.type + ">";
+};
+
+const renderTroubleshootingText = (value: string) => {
+  const lines = value.split(/\n+/).filter((line) => line.trim().length > 0);
+  const blocks: RenderBlock[] = [];
+  const listStack: ListBlock[] = [];
+  let paragraphLines: string[] = [];
+
+  const flushParagraph = () => {
+    if (paragraphLines.length === 0) return;
+    blocks.push(`<p>${paragraphLines.map(renderInlineText).join("<br />")}</p>`);
+    paragraphLines = [];
+  };
+
+  const appendList = (type: "ul" | "ol", indent: number, content: string) => {
+    flushParagraph();
+
+    while (listStack.length > 0 && indent < listStack[listStack.length - 1].indent) {
+      listStack.pop();
+    }
+
+    if (
+      listStack.length > 0 &&
+      indent === listStack[listStack.length - 1].indent &&
+      type !== listStack[listStack.length - 1].type
+    ) {
+      listStack.pop();
+    }
+
+    let currentList = listStack[listStack.length - 1];
+
+    if (!currentList || indent > currentList.indent || type !== currentList.type) {
+      const nextList: ListBlock = {
+        type,
+        indent,
+        items: []
+      };
+
+      if (currentList && indent > currentList.indent && currentList.items.length > 0) {
+        currentList.items[currentList.items.length - 1].children.push(nextList);
+      } else {
+        blocks.push(nextList);
+      }
+
+      listStack.push(nextList);
+      currentList = nextList;
+    }
+
+    currentList.items.push({
+      content,
+      children: []
+    });
+  };
+
+  lines.forEach((line) => {
+    const unorderedMatch = line.match(unorderedMarkerPattern);
+    const orderedMatch = line.match(orderedMarkerPattern);
+
+    if (unorderedMatch) {
+      appendList("ul", unorderedMatch[1].length, unorderedMatch[2]);
+      return;
+    }
+
+    if (orderedMatch) {
+      appendList("ol", orderedMatch[1].length, orderedMatch[2]);
+      return;
+    }
+
+    listStack.length = 0;
+    paragraphLines.push(line.trim());
+  });
+
+  flushParagraph();
+
+  return blocks.map((block) => (typeof block === "string" ? block : renderListBlock(block))).join("");
+};
 
 const hasStructuredSections = Boolean(problem || cause || solution || result || lesson);
 const slideSections = [
@@ -99,46 +196,23 @@ const slideSections = [
   <div class="slide-copy">
     <p class="slide-index">{String(index).padStart(2, "0")} / {keyLabel}</p>
     <h2 id={`slide-${index}`}>{title}</h2>
-    {
-      troubleshootingSummary && (
-        <dl class="troubleshooting-summary">
-          <div>
-            <dt>문제</dt>
-            <dd set:html={renderBoldText(troubleshootingSummary.problem)} />
-          </div>
-          <div>
-            <dt>판단</dt>
-            <dd set:html={renderBoldText(troubleshootingSummary.judgment)} />
-          </div>
-          <div>
-            <dt>결과</dt>
-            <dd set:html={renderBoldText(troubleshootingSummary.result)} />
-          </div>
-        </dl>
-      )
-    }
-    <details class="slide-detail">
-      <summary>상세 보기</summary>
-      <div class="slide-sections">
-        {
-          slideSections.map((section) => (
-            <section class:list={["slide-section", section.tone === "points" && "slide-section-points"]}>
-              <h3>{section.label}</h3>
-              {
-                section.tone === "points" ? (
-                  <ul class="slide-points">
-                    {section.items.map((item) => <li set:html={renderBoldText(item)} />)}
-                  </ul>
-                ) : (
-                  <div class="slide-body">
-                    {section.items.map((item) => <p set:html={renderBoldText(item)} />)}
-                  </div>
-                )
-              }
-            </section>
-          ))
-        }
-      </div>
-    </details>
+    <div class="slide-detail">
+      {
+        slideSections.map((section) => (
+          <section class:list={["slide-section", section.tone === "points" && "slide-section-points"]}>
+            <h3>{section.label}</h3>
+            {
+              section.tone === "points" ? (
+                <ul class="slide-points">
+                  {section.items.map((item) => <li set:html={renderBoldText(item)} />)}
+                </ul>
+              ) : (
+                <div class="slide-body" set:html={section.items.map(renderTroubleshootingText).join("")} />
+              )
+            }
+          </section>
+        ))
+      }
+    </div>
   </div>
 </section>

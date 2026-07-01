@@ -13,6 +13,9 @@ card:
   device: "laptop"
   image: "/projects/tave-main-page.png"
   imageAlt: "TAVE Website 메인 화면"
+  imageFit: "contain"
+  imagePosition: "center center"
+  screenRatio: "2940 / 1512"
 image: "/projects/tave-overview.svg"
 imageAlt: "TAVE Website의 콘텐츠 제공 구조 다이어그램"
 hoverImage: "/projects/tave-result.svg"
@@ -42,10 +45,6 @@ slides:
       - "**2,000건 부하 테스트를 통해 안정성을 검증한 뒤, 실제 지원 기간에 182명 지원자에게 메일 발송 성공률 100% 달성**"
     lesson:
       - "스레드 수처럼 결정하기 쉬운 설정값도 **실측 데이터를 기반**으로 결정해야 한다는 점을 배웠습니다."
-    troubleshootingSummary:
-      problem: "매 기수 300명 이상 지원자 대상 합격 안내 메일을 수동 발송하며 인력 소모와 누락 위험이 존재했습니다."
-      judgment: "Spring Batch 파티셔닝과 AWS SES를 도입하여 대량 메일 발송 자동화 시스템을 구축했습니다."
-      result: "2,000건 테스트 검증 후, 실제 지원 기간 중 182명을 대상으로 발송 성공률 100%를 달성했습니다."
   - key: "UX Performance"
     title: "MS Clarity 병목 분석과 WebP 전환으로 응답 속도 94.8% 개선"
     image: "/projects/tave-ms-clarity-webp.png"
@@ -69,8 +68,4 @@ slides:
       - "이미지 최적화도 단순히 WebP로 변환하는 것이 아니라, 원본 포맷과 압축 방식에 따라 **손실 압축**과 **무손실 압축**의 결과가 달라진다는 점을 확인했습니다."
       - "JPG처럼 이미 손실 압축된 포맷은 WebP 무손실 변환 시 파일 크기가 커질 수 있어, 포맷 특성을 이해한 뒤 선택해야 한다는 것을 경험했습니다."
       - "결국 최적화는 특정 기법을 적용하는 일이 아니라, **측정 결과**를 기준으로 사용자 경험에 실제로 효과가 있는 선택을 검증하는 과정이라는 점을 배웠습니다."
-    troubleshootingSummary:
-      problem: "MS Clarity 분석으로 고해상도 이미지를 동반한 페이지에 병목 구간을 발견했습니다."
-      judgment: "손실·무손실 압축 비교 테스트를 통해 손실 압축 WebP 변환을 채택했습니다."
-      result: "응답 속도를 94.8% 개선하여 UX를 개선하였습니다."
 ---
