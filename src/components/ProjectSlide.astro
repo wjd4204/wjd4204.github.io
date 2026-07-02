@@ -50,6 +50,8 @@ const renderBoldText = (value: string) =>
   escapeHtml(value).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 
 const renderInlineText = (value: string) => renderBoldText(value);
+const renderSoftBreakText = (value: string) =>
+  value.split(/\n/).map(renderInlineText).join("<br />");
 const unorderedMarkerPattern = /^(\s*)[-*]\s+(.+)$/;
 const orderedMarkerPattern = /^(\s*)\d+[.)]\s+(.+)$/;
 
@@ -70,7 +72,7 @@ const renderListBlock = (list: ListBlock): string => {
   const renderedItems = list.items
     .map((item) => {
       const children = item.children.map(renderListBlock).join("");
-      return "<li>" + renderInlineText(item.content) + children + "</li>";
+      return "<li>" + renderSoftBreakText(item.content) + children + "</li>";
     })
     .join("");
 
@@ -78,14 +80,14 @@ const renderListBlock = (list: ListBlock): string => {
 };
 
 const renderTroubleshootingText = (value: string) => {
-  const lines = value.split(/\n+/).filter((line) => line.trim().length > 0);
+  const lines = value.split(/\n/);
   const blocks: RenderBlock[] = [];
   const listStack: ListBlock[] = [];
   let paragraphLines: string[] = [];
 
   const flushParagraph = () => {
     if (paragraphLines.length === 0) return;
-    blocks.push(`<p>${paragraphLines.map(renderInlineText).join("<br />")}</p>`);
+    blocks.push(`<p>${paragraphLines.map(renderSoftBreakText).join("<br />")}</p>`);
     paragraphLines = [];
   };
 
@@ -130,6 +132,12 @@ const renderTroubleshootingText = (value: string) => {
   };
 
   lines.forEach((line) => {
+    if (line.trim().length === 0) {
+      listStack.length = 0;
+      flushParagraph();
+      return;
+    }
+
     const unorderedMatch = line.match(unorderedMarkerPattern);
     const orderedMatch = line.match(orderedMarkerPattern);
 
@@ -140,6 +148,14 @@ const renderTroubleshootingText = (value: string) => {
 
     if (orderedMatch) {
       appendList("ol", orderedMatch[1].length, orderedMatch[2]);
+      return;
+    }
+
+    const currentList = listStack[listStack.length - 1];
+    const currentItem = currentList?.items[currentList.items.length - 1];
+
+    if (currentItem) {
+      currentItem.content += "\n" + line.trim();
       return;
     }
 

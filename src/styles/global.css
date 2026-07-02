@@ -892,6 +892,10 @@ p {
   font-size: clamp(1.08rem, 2.5vw, 1.24rem);
 }
 
+.project-hero .lead {
+  white-space: pre-line;
+}
+
 .hero-panel {
   border-left: 1px solid var(--line);
   padding-left: 28px;
