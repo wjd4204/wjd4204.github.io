@@ -7,7 +7,7 @@ date: 2026-06-02
 period: "2025.01 - 2026.01"
 team: "FE 2인, BE 2인, Marketing 1인, AI 1인"
 stack: [ "Spring Boot", "AWS", "Redis", "EventListener + SQS + ECS", "Google Analytics"]
-role: "PM, Backend Developer"
+role: "PM, Backend Engineer"
 status: "Platform"
 card:
   badge: "창업형 서비스 프로젝트"

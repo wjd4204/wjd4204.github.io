@@ -1,4 +1,4 @@
-# Backend Developer Portfolio
+# Backend Engineer Portfolio
 
 Astro 기반의 백엔드 개발자 포트폴리오 사이트입니다. 미니멀한 기술 문서형 스타일을 사용하고, 프로젝트 상세 페이지는 PPT 슬라이드처럼 읽히는 큰 카드 섹션으로 구성했습니다.
 
