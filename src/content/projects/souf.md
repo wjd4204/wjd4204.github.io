@@ -11,6 +11,7 @@ role: "PM, Backend Developer"
 status: "Platform"
 card:
   badge: "창업형 서비스 프로젝트"
+  badges: ["초기 MVP 제품 개발", "AWS 3-Tier 운영", "Redis 캐싱 88.9% 개선", "GA 기반 문제 정의"]
   device: "laptop"
   image: "/projects/souf-main-page.png"
   imageAlt: "SOUF 메인 웹사이트 화면"

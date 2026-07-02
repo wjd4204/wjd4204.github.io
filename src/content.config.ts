@@ -12,6 +12,7 @@ const projects = defineCollection({
     status: z.string(),
     card: z.object({
       badge: z.string(),
+      badges: z.array(z.string()).default([]),
       device: z.enum(["laptop", "phones"]).default("laptop"),
       image: z.string(),
       imageAlt: z.string(),

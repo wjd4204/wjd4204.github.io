@@ -11,6 +11,7 @@ role: "배포 환경 구성 및 동아리 지원 기능 담당"
 status: "Platform"
 card:
   badge: "실전 운영 프로젝트"
+  badges: ["Spring Batch 자동화", "AWS SES 메일 운영", "MS Clarity 병목 분석", "렌더링 94.8% 개선"]
   device: "laptop"
   image: "/projects/tave-main-page.png"
   imageAlt: "TAVE Website 메인 화면"

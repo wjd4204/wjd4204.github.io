@@ -9,6 +9,7 @@ const { project } = Astro.props;
 const { title, description, role, card } = project.data;
 const slug = project.id.replace(/\.md$/, "");
 const isPhonePreview = card.device === "phones";
+const badges = [card.badge, role, ...card.badges];
 const previewStyle = [
   card.imageFit && `--card-image-fit: ${card.imageFit}`,
   card.imagePosition && `--card-image-position: ${card.imagePosition}`,
@@ -23,8 +24,7 @@ const previewStyle = [
       <p class="project-description">{description}</p>
     </div>
     <div class="meta-row">
-      <span class="tag">{card.badge}</span>
-      <span class="tag">{role}</span>
+      {badges.map((badge) => <span class="tag">{badge}</span>)}
     </div>
   </div>
   <span class:list={["project-card-media", isPhonePreview ? "phone-media" : "laptop-media"]} style={previewStyle}>

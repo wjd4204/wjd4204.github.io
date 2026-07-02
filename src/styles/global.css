@@ -7,8 +7,6 @@
   --surface-strong: #e2e8f0;
   --card: #ffffff;
   --card-soft: rgba(255, 255, 255, 0.92);
-  --skills-bg: linear-gradient(180deg, #f8fafc, #eff6ff);
-  --projects-bg: linear-gradient(180deg, #eff6ff, #f8fafc);
   --button-bg: #0f172a;
   --button-text: #ffffff;
   --button-hover-text: #ffffff;
@@ -37,8 +35,6 @@
   --surface-strong: #1e293b;
   --card: #111827;
   --card-soft: rgba(17, 24, 39, 0.92);
-  --skills-bg: linear-gradient(180deg, #020617, #0f172a);
-  --projects-bg: linear-gradient(180deg, #0f172a, #020617);
   --button-bg: #60a5fa;
   --button-text: #020617;
   --button-hover-text: #020617;
@@ -959,7 +955,7 @@ p {
 }
 
 .projects-section {
-  background: var(--projects-bg);
+  background: var(--bg);
 }
 
 .project-card {

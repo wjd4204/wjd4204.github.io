@@ -12,6 +12,7 @@ role: "Backend 테스트 코드 작성 및 서비스 품질 개선"
 status: "Quality Improvement"
 card:
   badge: "코드 품질 개선 프로젝트"
+  badges: ["Redis Sorted Set 적용", "DB 조회 성능 76% 개선", "Mockito 단위 테스트", "JaCoCo 커버리지 75%"]
   device: "phones"
   image: "/projects/flink-participant.png"
   imageAlt: "F'LINK 참가자 모바일 화면"
