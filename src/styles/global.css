@@ -17,7 +17,7 @@
   --accent: #2563eb;
   --accent-soft: #eff6ff;
   --accent-strong: #1d4ed8;
-  --section-label: rgb(15 23 42 / 30%);
+  --section-label: rgb(15 23 42 / 48%);
   --soft-blue: #eff6ff;
   --soft-cyan: #ecfeff;
   --soft-slate: #f8fafc;
@@ -45,7 +45,7 @@
   --accent: #60a5fa;
   --accent-soft: rgba(37, 99, 235, 0.16);
   --accent-strong: #93c5fd;
-  --section-label: rgb(229 231 235 / 30%);
+  --section-label: rgb(229 231 235 / 52%);
   --soft-blue: rgba(37, 99, 235, 0.16);
   --soft-cyan: rgba(56, 189, 248, 0.1);
   --soft-slate: #0f172a;
@@ -423,7 +423,7 @@ textarea {
   gap: 6px;
   justify-items: center;
   margin-top: clamp(42px, 8vh, 70px);
-  color: color-mix(in srgb, var(--hero-muted) 70%, transparent);
+  color: color-mix(in srgb, var(--hero-muted) 88%, var(--hero-text));
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.18em;
