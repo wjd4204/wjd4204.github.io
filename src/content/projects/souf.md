@@ -114,9 +114,9 @@ slides:
       - "- 썸네일 추출 도구는 FFmpeg를 선택\n
       - AWS Elastic Transcoder나 MediaConvert는 단순 썸네일 추출 목적에는 비용과 설정 부담이 크다고 판단하여 제외"
       - "1. 컨테이너 기반 환경 구축\n
-        - FFmpeg Docker 이미지 빌드\n
-        - AWS ECR 푸시\n
-      
+      - FFmpeg Docker 이미지 빌드\n
+      - AWS ECR 푸시\n
+
       2. 이벤트 발생과 비동기 큐잉\n
         - 동영상 업로드 이벤트 발생\n
         - EventListener가 감지 후 **AWS SQS**로 메시지 즉시 발행\n

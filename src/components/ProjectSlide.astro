@@ -84,6 +84,7 @@ const renderTroubleshootingText = (value: string) => {
   const blocks: RenderBlock[] = [];
   const listStack: ListBlock[] = [];
   let paragraphLines: string[] = [];
+  let pendingListBreak = false;
 
   const flushParagraph = () => {
     if (paragraphLines.length === 0) return;
@@ -93,9 +94,30 @@ const renderTroubleshootingText = (value: string) => {
 
   const appendList = (type: "ul" | "ol", indent: number, content: string) => {
     flushParagraph();
+    pendingListBreak = false;
 
     while (listStack.length > 0 && indent < listStack[listStack.length - 1].indent) {
       listStack.pop();
+    }
+
+    let currentList = listStack[listStack.length - 1];
+
+    if (
+      currentList &&
+      indent === currentList.indent &&
+      currentList.type === "ol" &&
+      type === "ul" &&
+      currentList.items.length > 0
+    ) {
+      const childList: ListBlock = {
+        type,
+        indent: currentList.indent + 1,
+        items: []
+      };
+
+      currentList.items[currentList.items.length - 1].children.push(childList);
+      listStack.push(childList);
+      currentList = childList;
     }
 
     if (
@@ -106,7 +128,7 @@ const renderTroubleshootingText = (value: string) => {
       listStack.pop();
     }
 
-    let currentList = listStack[listStack.length - 1];
+    currentList = listStack[listStack.length - 1];
 
     if (!currentList || indent > currentList.indent || type !== currentList.type) {
       const nextList: ListBlock = {
@@ -133,8 +155,8 @@ const renderTroubleshootingText = (value: string) => {
 
   lines.forEach((line) => {
     if (line.trim().length === 0) {
-      listStack.length = 0;
       flushParagraph();
+      pendingListBreak = listStack.length > 0;
       return;
     }
 
@@ -149,6 +171,11 @@ const renderTroubleshootingText = (value: string) => {
     if (orderedMatch) {
       appendList("ol", orderedMatch[1].length, orderedMatch[2]);
       return;
+    }
+
+    if (pendingListBreak) {
+      listStack.length = 0;
+      pendingListBreak = false;
     }
 
     const currentList = listStack[listStack.length - 1];
