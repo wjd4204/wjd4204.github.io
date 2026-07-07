@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import SkillLogo from "../components/SkillLogo.astro";
 
 const projects = (await getCollection("projects"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -46,6 +45,10 @@ const stacks = [
   {
     group: "Database",
     items: ["MySQL", "PostgreSQL", "MongoDB", "Redis"]
+  },
+  {
+    group: "Network / Messaging",
+    items: ["rabbitMQ", "WebSocket", "Stomp"]
   },
   {
     group: "Infra / Cloud",
@@ -201,10 +204,7 @@ const stacks = [
               </div>
               <div class="skill-chip-list">
                 {stackGroup.items.map((item) => (
-                  <span class="skill-tile">
-                    <SkillLogo name={item} />
-                    <span>{item}</span>
-                  </span>
+                  <span class="skill-tile">{item}</span>
                 ))}
               </div>
             </section>
