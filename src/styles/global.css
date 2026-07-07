@@ -1853,6 +1853,40 @@ p {
   min-width: 0;
 }
 
+.project-tech-card-title .skill-logo {
+  display: inline-grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line));
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--surface) 62%, var(--card));
+  color: var(--accent-strong);
+}
+
+.project-tech-card-title .skill-logo img,
+.project-tech-card-title .skill-logo svg {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  overflow: visible;
+}
+
+.project-tech-card-title .skill-logo path,
+.project-tech-card-title .skill-logo circle {
+  fill: currentColor;
+}
+
+.project-tech-card-title .skill-logo text {
+  fill: currentColor;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 7px;
+  font-weight: 900;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
 .project-tech-card-title strong {
   font-size: 1.02rem;
   font-weight: 850;
